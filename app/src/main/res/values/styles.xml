@@ -2,13 +2,26 @@
 
     <!--Themes-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
     <style name="AppTheme.Splash">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/primary</item>
+    </style>
+
+    <style name="AppTheme.SignIn">
+        <item name="android:windowBackground">@color/primary</item>
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
+    </style>
+
+    <!--Widgets-->
+    <style name="Widget.SignIn.EditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/transparent_white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/transparent_white</item>
     </style>
 
 </resources>

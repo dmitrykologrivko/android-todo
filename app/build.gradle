@@ -12,20 +12,77 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField("String", "BACKEND_URL", "\"http://10.0.2.2:8000/api/\"")
+            buildConfigField("String", "CLIENT_ID", "\"y1GXo1Jz8qPuADSdbdUNcv1RJaEuatobLDHBAPbd\"")
+            buildConfigField("String", "CLIENT_SECRET", "\"yosuUzzPt246ugJmFoDnS8FkctYcqj6Xp9LwgI9n" +
+                    "EGMsf73j3t3H984ICe2B9a6KDXigXLhkOcCCJugdEtHoXwE58h7NMBrXIpDlSi3uwg61G3oXsB7Wo5NniSQTjNrE\"")
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField("String", "BACKEND_URL", "\"http://10.0.2.2:8000/api/\"")
+            buildConfigField("String", "CLIENT_ID", "\"y1GXo1Jz8qPuADSdbdUNcv1RJaEuatobLDHBAPbd\"")
+            buildConfigField("String", "CLIENT_SECRET", "\"yosuUzzPt246ugJmFoDnS8FkctYcqj6Xp9LwgI9n" +
+                    "EGMsf73j3t3H984ICe2B9a6KDXigXLhkOcCCJugdEtHoXwE58h7NMBrXIpDlSi3uwg61G3oXsB7Wo5NniSQTjNrE\"")
         }
     }
 }
 
 dependencies {
+    final APPCOMPAT_VERSION = '25.1.0'
+    final CONSTRAINT_LAYOUT_VERSION = '1.0.0-beta4'
+    final MOSBY_VERSION = '2.0.1'
+    final BUTTERKNIFE_VERSION = '8.5.1'
+    final RXJAVA_VERSION = '1.2.5'
+    final RXANDROID_VERSION = '1.2.1'
+    final RETROFIT_VERSION = '2.1.0'
+    final STETHO_VERSION = '1.4.2'
+    final ESPRESSO_CORE_VERSION = '2.2.2'
+    final JUNIT_VERSION = '4.12'
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //                                 App Dependencies                                         //
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /* Support */
+    compile "com.android.support:appcompat-v7:$APPCOMPAT_VERSION"
+    compile "com.android.support.constraint:constraint-layout:$CONSTRAINT_LAYOUT_VERSION"
+
+    /* MVP */
+    compile "com.hannesdorfmann.mosby:mvp:$MOSBY_VERSION"
+
+    /* View binding */
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+
+    /* ReactiveX */
+    compile "io.reactivex:rxjava:$RXJAVA_VERSION"
+    compile "io.reactivex:rxandroid:$RXANDROID_VERSION"
+
+    /* Network */
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+
+    /* Debug */
+    compile "com.facebook.stetho:stetho:$STETHO_VERSION"
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //                            Instrumentation test dependencies                             //
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$ESPRESSO_CORE_VERSION", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //                                  Unit tests dependencies                                 //
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    testCompile "junit:junit:$JUNIT_VERSION"
 }

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Todo List</string>
+
+    <!--Sign In-->
+    <string name="sign_in_email_hint">Email</string>
+    <string name="sign_in_password_hint">Password</string>
+    <string name="sign_in_submit_action">Submit</string>
+    <string name="sign_in_empty_email_error">Empty username</string>
+    <string name="sign_in_empty_password_error">Empty password</string>
+
+    <!--Dialogs-->
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_error_title">Sorry</string>
+
+    <!--General messages-->
+    <string name="msg_please_wait">Please wait…</string>
 </resources>
