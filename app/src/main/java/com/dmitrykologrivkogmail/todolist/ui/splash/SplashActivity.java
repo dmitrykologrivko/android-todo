@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.activities;
+package com.dmitrykologrivkogmail.todolist.ui.splash;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,8 +6,9 @@ import android.support.annotation.NonNull;
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.injection.component.SplashComponent;
-import com.dmitrykologrivkogmail.todolist.presenters.SplashPresenter;
-import com.dmitrykologrivkogmail.todolist.ui.SplashView;
+import com.dmitrykologrivkogmail.todolist.ui.main.MainActivity;
+import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
+import com.dmitrykologrivkogmail.todolist.ui.signin.SignInActivity;
 
 public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> implements SplashView {
 

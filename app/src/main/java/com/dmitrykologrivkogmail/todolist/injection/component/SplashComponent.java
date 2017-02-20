@@ -2,8 +2,8 @@ package com.dmitrykologrivkogmail.todolist.injection.component;
 
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.injection.module.PresenterModule;
-import com.dmitrykologrivkogmail.todolist.presenters.SplashPresenter;
-import com.dmitrykologrivkogmail.todolist.ui.activities.SplashActivity;
+import com.dmitrykologrivkogmail.todolist.ui.splash.SplashPresenter;
+import com.dmitrykologrivkogmail.todolist.ui.splash.SplashActivity;
 
 import dagger.Subcomponent;
 

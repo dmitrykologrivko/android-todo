@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui;
+package com.dmitrykologrivkogmail.todolist.ui.splash;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 

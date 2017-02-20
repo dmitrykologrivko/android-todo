@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.activities;
+package com.dmitrykologrivkogmail.todolist.ui.main;
 
 import android.content.Context;
 import android.content.Intent;

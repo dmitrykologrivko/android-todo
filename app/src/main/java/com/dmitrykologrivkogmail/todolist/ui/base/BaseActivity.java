@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.activities;
+package com.dmitrykologrivkogmail.todolist.ui.base;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;

@@ -1,10 +1,10 @@
-package com.dmitrykologrivkogmail.todolist.presenters;
+package com.dmitrykologrivkogmail.todolist.ui.signin;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthResponse;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
-import com.dmitrykologrivkogmail.todolist.ui.SignInView;
+import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
 import javax.inject.Inject;
 

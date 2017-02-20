@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.presenters;
+package com.dmitrykologrivkogmail.todolist.ui.base;
 
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
@@ -9,8 +9,8 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class BasePresenter<V extends MvpView> extends MvpBasePresenter<V> {
 
-    final CompositeSubscription mCompositeSubscription;
-    final DataManager mDataManager;
+    protected final CompositeSubscription mCompositeSubscription;
+    protected final DataManager mDataManager;
 
     public BasePresenter(CompositeSubscription cs, DataManager dataManager) {
         mCompositeSubscription = cs;

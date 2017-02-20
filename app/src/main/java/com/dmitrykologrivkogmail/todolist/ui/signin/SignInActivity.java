@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.activities;
+package com.dmitrykologrivkogmail.todolist.ui.signin;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,8 +10,8 @@ import android.widget.EditText;
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.injection.component.SignInComponent;
-import com.dmitrykologrivkogmail.todolist.presenters.SignInPresenter;
-import com.dmitrykologrivkogmail.todolist.ui.SignInView;
+import com.dmitrykologrivkogmail.todolist.ui.main.MainActivity;
+import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.util.DialogFactory;
 
 import butterknife.BindView;

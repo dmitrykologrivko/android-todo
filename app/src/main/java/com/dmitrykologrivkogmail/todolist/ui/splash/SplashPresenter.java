@@ -1,8 +1,8 @@
-package com.dmitrykologrivkogmail.todolist.presenters;
+package com.dmitrykologrivkogmail.todolist.ui.splash;
 
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
-import com.dmitrykologrivkogmail.todolist.ui.SplashView;
+import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
 import java.util.concurrent.TimeUnit;
 
