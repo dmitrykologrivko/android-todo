@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.widget.EditText;
 
 import com.dmitrykologrivkogmail.todolist.R;
+import com.dmitrykologrivkogmail.todolist.TodoApplication;
+import com.dmitrykologrivkogmail.todolist.injection.component.SignInComponent;
 import com.dmitrykologrivkogmail.todolist.presenters.SignInPresenter;
 import com.dmitrykologrivkogmail.todolist.ui.SignInView;
 import com.dmitrykologrivkogmail.todolist.util.DialogFactory;
@@ -19,6 +21,9 @@ import butterknife.OnClick;
 public class SignInActivity extends BaseActivity<SignInView, SignInPresenter> implements SignInView {
 
     private static final int LAYOUT = R.layout.activity_sign_in;
+
+    private final SignInComponent mSignInComponent =
+            TodoApplication.getApplicationComponent().plusSignInComponent();
 
     ProgressDialog mProgressDialog;
 
@@ -47,7 +52,7 @@ public class SignInActivity extends BaseActivity<SignInView, SignInPresenter> im
     @NonNull
     @Override
     public SignInPresenter createPresenter() {
-        return new SignInPresenter(getApplicationContext());
+        return mSignInComponent.signInPresenter();
     }
 
     public String getEditUsername() {

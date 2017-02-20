@@ -1,12 +1,13 @@
 package com.dmitrykologrivkogmail.todolist.data.api.oauth;
 
-import android.content.Context;
-
 import com.dmitrykologrivkogmail.todolist.BuildConfig;
+import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
+
+import javax.inject.Inject;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -14,6 +15,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import rx.Observable;
 
+@PerApplication
 public class OAuthManager {
 
     private static final String OAUTH_URL = "o/token/";
@@ -34,13 +36,15 @@ public class OAuthManager {
     private static final String GRANT_TYPE_PASSWORD = "password";
     private static final String GRANT_TYPE_REFRESH_TOKEN = "refresh_token";
 
-    private final OkHttpClient mClient = new OkHttpClient();
-    private final Gson mGson = new Gson();
-
+    private final OkHttpClient mClient;
+    private final Gson mGson;
     private final OAuthStore mStore;
 
-    public OAuthManager(Context context) {
-        mStore = new OAuthStore(context);
+    @Inject
+    public OAuthManager(OkHttpClient client, Gson gson, OAuthStore store) {
+        mClient = client;
+        mGson = gson;
+        mStore = store;
     }
 
     public OAuthResponse getAccessTokenSync(final String username,

@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
+import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+
+import javax.inject.Inject;
+
+@PerApplication
 class OAuthStore {
 
     private static final String PREF_FILE_NAME = "oauth_pref";
@@ -16,6 +21,7 @@ class OAuthStore {
 
     private final SharedPreferences mPref;
 
+    @Inject
     OAuthStore(Context context) {
         mPref = context.getSharedPreferences(encrypt(PREF_FILE_NAME), Context.MODE_PRIVATE);
     }

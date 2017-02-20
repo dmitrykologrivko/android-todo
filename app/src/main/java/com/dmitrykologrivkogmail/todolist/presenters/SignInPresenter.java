@@ -1,18 +1,23 @@
 package com.dmitrykologrivkogmail.todolist.presenters;
 
-import android.content.Context;
-
 import com.dmitrykologrivkogmail.todolist.R;
+import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthResponse;
+import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.SignInView;
+
+import javax.inject.Inject;
 
 import rx.Observer;
 import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
+@PerActivity
 public class SignInPresenter extends BasePresenter<SignInView> {
 
-    public SignInPresenter(Context context) {
-        super(context);
+    @Inject
+    public SignInPresenter(CompositeSubscription cs, DataManager dataManager) {
+        super(cs, dataManager);
     }
 
     public void signIn() {

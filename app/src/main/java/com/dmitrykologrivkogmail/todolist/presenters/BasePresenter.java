@@ -1,7 +1,5 @@
 package com.dmitrykologrivkogmail.todolist.presenters;
 
-import android.content.Context;
-
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
@@ -11,12 +9,12 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class BasePresenter<V extends MvpView> extends MvpBasePresenter<V> {
 
-    final CompositeSubscription mCompositeSubscription = new CompositeSubscription();
-
+    final CompositeSubscription mCompositeSubscription;
     final DataManager mDataManager;
 
-    public BasePresenter(Context context) {
-        mDataManager = new DataManager(context);
+    public BasePresenter(CompositeSubscription cs, DataManager dataManager) {
+        mCompositeSubscription = cs;
+        mDataManager = dataManager;
     }
 
     @Override
