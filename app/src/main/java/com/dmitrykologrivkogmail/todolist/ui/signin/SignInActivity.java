@@ -10,8 +10,8 @@ import android.widget.EditText;
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.injection.component.SignInComponent;
-import com.dmitrykologrivkogmail.todolist.ui.main.MainActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
+import com.dmitrykologrivkogmail.todolist.ui.tasks.TasksActivity;
 import com.dmitrykologrivkogmail.todolist.util.DialogFactory;
 
 import butterknife.BindView;
@@ -64,8 +64,8 @@ public class SignInActivity extends BaseActivity<SignInView, SignInPresenter> im
     }
 
     @Override
-    public void startMainActivity() {
-        startActivity(MainActivity.getStartIntent(this));
+    public void startTasksActivity() {
+        startActivity(TasksActivity.getStartIntent(this));
     }
 
     @Override

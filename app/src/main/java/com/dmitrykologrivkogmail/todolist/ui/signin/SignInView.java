@@ -7,7 +7,7 @@ public interface SignInView extends MvpView {
 
     String getEditPassword();
 
-    void startMainActivity();
+    void startTasksActivity();
 
     void showProgress();
 

@@ -24,7 +24,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
         checkViewAttached();
 
         Subscription subscription = mDataManager.isAuthenticated()
-                .delay(3, TimeUnit.SECONDS)
+                .delay(1, TimeUnit.SECONDS)
                 .subscribe(new Observer<Boolean>() {
                     @Override
                     public void onCompleted() {
@@ -39,7 +39,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
                     @Override
                     public void onNext(Boolean isAuthenticated) {
                         if (isAuthenticated) {
-                            getView().startMainActivity();
+                            getView().startTasksActivity();
                         } else {
                             getView().startSignInActivity();
                         }

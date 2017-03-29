@@ -40,7 +40,7 @@ public class SignInPresenter extends BasePresenter<SignInView> {
                     @Override
                     public void onCompleted() {
                         getView().dismissProgress();
-                        getView().startMainActivity();
+                        getView().startTasksActivity();
                         getView().finish();
                     }
 

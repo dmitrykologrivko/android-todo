@@ -18,8 +18,6 @@ import rx.Observable;
 @PerApplication
 public class OAuthManager {
 
-    private static final String OAUTH_URL = "o/token/";
-
     // Header consts
     private static final String HEADER_ACCEPT = "Accept";
     private static final String HEADER_APPLICATION_JSON = "application/json";
@@ -50,11 +48,11 @@ public class OAuthManager {
     public OAuthResponse getAccessTokenSync(final String username,
                                             final String password) throws OAuthError {
         Request request = new Request.Builder()
-                .url(BuildConfig.BACKEND_URL + OAUTH_URL)
+                .url(BuildConfig.OAUTH_URL)
                 .header(HEADER_ACCEPT, HEADER_APPLICATION_JSON)
                 .post(new FormBody.Builder()
-                        .add(FORM_FIELD_CLIENT_ID, BuildConfig.CLIENT_ID)
-                        .add(FORM_FIELD_CLIENT_SECRET, BuildConfig.CLIENT_SECRET)
+                        .add(FORM_FIELD_CLIENT_ID, BuildConfig.OAUTH_CLIENT_ID)
+                        .add(FORM_FIELD_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_SECRET)
                         .add(FORM_FIELD_GRANT_TYPE, GRANT_TYPE_PASSWORD)
                         .add(FORM_FIELD_USERNAME, username)
                         .add(FORM_FIELD_PASSWORD, password)
@@ -85,11 +83,11 @@ public class OAuthManager {
         String refreshToken = mStore.getRefreshToken();
 
         Request request = new Request.Builder()
-                .url(BuildConfig.BACKEND_URL + OAUTH_URL)
+                .url(BuildConfig.OAUTH_URL)
                 .header(HEADER_ACCEPT, HEADER_APPLICATION_JSON)
                 .post(new FormBody.Builder()
-                        .add(FORM_FIELD_CLIENT_ID, BuildConfig.CLIENT_ID)
-                        .add(FORM_FIELD_CLIENT_SECRET, BuildConfig.CLIENT_SECRET)
+                        .add(FORM_FIELD_CLIENT_ID, BuildConfig.OAUTH_CLIENT_ID)
+                        .add(FORM_FIELD_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_SECRET)
                         .add(FORM_FIELD_GRANT_TYPE, GRANT_TYPE_REFRESH_TOKEN)
                         .add(FORM_FIELD_REFRESH_TOKEN, refreshToken)
                         .build())

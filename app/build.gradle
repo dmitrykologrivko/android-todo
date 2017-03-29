@@ -13,26 +13,30 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "BACKEND_URL", "\"http://10.0.2.2:8000/api/\"")
-            buildConfigField("String", "CLIENT_ID", "\"y1GXo1Jz8qPuADSdbdUNcv1RJaEuatobLDHBAPbd\"")
-            buildConfigField("String", "CLIENT_SECRET", "\"yosuUzzPt246ugJmFoDnS8FkctYcqj6Xp9LwgI9n" +
-                    "EGMsf73j3t3H984ICe2B9a6KDXigXLhkOcCCJugdEtHoXwE58h7NMBrXIpDlSi3uwg61G3oXsB7Wo5NniSQTjNrE\"")
+            // debug config
+            buildConfigField("String", "BACKEND_URL", "\"http://localhost:8000/api/\"")
+            buildConfigField("String", "OAUTH_URL", "\"http://localhost:8000/api/o/token/\"")
+            buildConfigField("String", "OAUTH_CLIENT_ID", "\"ex10IDblfgy4jNqqRpVBk1XtNpe1pmOCaPiW9T35\"")
+            buildConfigField("String", "OAUTH_CLIENT_SECRET", "\"5KOvpPjAs3BqxuzUfxqEqhpzX7YpqCGEyF6kubT4ZNgXyoakTAXmDqgna8j4MK5N18cm8KbJ47YHJ74rUloymMPdHOUY7gG5x2Xtv4zuNPtnf30qNDMTlxEz6yn2b5D2\"")
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            buildConfigField("String", "BACKEND_URL", "\"http://10.0.2.2:8000/api/\"")
-            buildConfigField("String", "CLIENT_ID", "\"y1GXo1Jz8qPuADSdbdUNcv1RJaEuatobLDHBAPbd\"")
-            buildConfigField("String", "CLIENT_SECRET", "\"yosuUzzPt246ugJmFoDnS8FkctYcqj6Xp9LwgI9n" +
-                    "EGMsf73j3t3H984ICe2B9a6KDXigXLhkOcCCJugdEtHoXwE58h7NMBrXIpDlSi3uwg61G3oXsB7Wo5NniSQTjNrE\"")
+            // release config
+            buildConfigField("String", "BACKEND_URL", "\"http://localhost:8000/api/v1/\"")
+            buildConfigField("String", "OAUTH_URL", "\"http://localhost:8000/api/o/token/\"")
+            buildConfigField("String", "OAUTH_CLIENT_ID", "\"I5YRrL9Z33cMO2DMCtd1v5jD7YXdcMWYwbHkoUQ3\"")
+            buildConfigField("String", "OAUTH_CLIENT_SECRET", "\"dL2BRdqOT5kAivmoQBhjmKrLQoYIWYM6pL7UkfmjFz" +
+                    "Tsg3iCHa9R19jAprElVkz4Zdav2rpT3GGSNn2e0CL31MRLWw9OqAArhnVnon8QfWw03cRo0ei2UUhgPiL7aaf5\"")
         }
     }
 }
 
 dependencies {
     final APPCOMPAT_VERSION = '25.1.0'
+    final DESIGN_VERSION = '25.3.1'
     final CONSTRAINT_LAYOUT_VERSION = '1.0.0-beta4'
     final BUTTERKNIFE_VERSION = '8.5.1'
     final RETROFIT_VERSION = '2.1.0'
@@ -52,6 +56,8 @@ dependencies {
 
     /* Support */
     compile "com.android.support:appcompat-v7:$APPCOMPAT_VERSION"
+    compile "com.android.support:recyclerview-v7:$APPCOMPAT_VERSION"
+    compile "com.android.support:design:$DESIGN_VERSION"
     compile "com.android.support.constraint:constraint-layout:$CONSTRAINT_LAYOUT_VERSION"
 
     /* Network */

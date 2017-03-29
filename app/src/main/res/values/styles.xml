@@ -16,6 +16,11 @@
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
     </style>
 
+    <!--Themes Overlay-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
     <!--Widgets-->
     <style name="Widget.SignIn.EditText" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/transparent_white</item>

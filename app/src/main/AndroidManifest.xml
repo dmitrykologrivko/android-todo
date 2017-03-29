@@ -28,6 +28,9 @@
         <activity android:name=".ui.signin.SignInActivity"
                   android:screenOrientation="sensorPortrait"
                   android:theme="@style/AppTheme.SignIn"/>
+        <!--Tasks Activity-->
+        <activity android:name=".ui.tasks.TasksActivity"
+            android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>

@@ -1,8 +1,12 @@
 package com.dmitrykologrivkogmail.todolist.data;
 
+import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthManager;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthResponse;
+import com.dmitrykologrivkogmail.todolist.data.api.services.TasksService;
 import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,9 +21,12 @@ public class DataManager {
 
     private final OAuthManager mOAuthManager;
 
+    private TasksService mTasksService;
+
     @Inject
-    public DataManager(OAuthManager manager) {
+    public DataManager(OAuthManager manager, TasksService tasksService) {
         mOAuthManager = manager;
+        mTasksService = tasksService;
         mSchedulersTransformer = null;
 //        mSchedulersTransformer = o -> ((Observable) o).subscribeOn(mIoThread)
 //                .observeOn(mUiThread)
@@ -34,6 +41,12 @@ public class DataManager {
 
     public Observable<Boolean> isAuthenticated() {
         return mOAuthManager.isAuthenticated()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<List<TaskDTO>> getTasks() {
+        return mTasksService.getTasks()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
