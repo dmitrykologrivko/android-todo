@@ -62,10 +62,10 @@ class OAuthStore {
 
     private String encrypt(String input) {
         // Simple encryption, not very strong!
-        return Base64.encodeToString(input.getBytes(), Base64.DEFAULT);
+        return Base64.encodeToString(input.getBytes(), Base64.NO_WRAP);
     }
 
     private String decrypt(String input) {
-        return new String(Base64.decode(input, Base64.DEFAULT));
+        return new String(Base64.decode(input, Base64.NO_WRAP));
     }
 }
