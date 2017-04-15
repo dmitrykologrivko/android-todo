@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
@@ -46,9 +46,6 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
-    @BindView(R.id.text_empty)
-    TextView mTextEmpty;
-
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
@@ -65,6 +62,7 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
         mToolbar.setTitle(R.string.app_name);
 
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.accent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
         mRecyclerView.setAdapter(mTasksAdapter);
@@ -99,8 +97,6 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
     @Override
     public void showTasks(List<TaskDTO> tasks) {
-        mTextEmpty.setVisibility(View.GONE);
-
         mTasksAdapter.setTasks(tasks);
         mTasksAdapter.notifyDataSetChanged();
     }
@@ -118,7 +114,10 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
         mTasksAdapter.setTasks(Collections.<TaskDTO>emptyList());
         mTasksAdapter.notifyDataSetChanged();
 
-        mTextEmpty.setVisibility(View.VISIBLE);
+        Toast.makeText(this,
+                R.string.msg_empty_list,
+                Toast.LENGTH_SHORT)
+                .show();
     }
 
     @Override
