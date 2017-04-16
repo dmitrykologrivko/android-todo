@@ -57,6 +57,12 @@ public class DataManager {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<TaskDTO> createTask(String description) {
+        return mTasksService.createTask(description)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     @SuppressWarnings("unchecked")
     private <T> Observable.Transformer<T, T> applySchedulers() {
         return (Observable.Transformer<T, T>) mSchedulersTransformer;

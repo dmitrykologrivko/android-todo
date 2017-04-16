@@ -8,8 +8,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dmitrykologrivkogmail.todolist.R;
@@ -48,6 +52,9 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.edit_description)
+    EditText mEditDescription;
+
     public static Intent getStartIntent(Context ctx) {
         return new Intent(ctx, TasksActivity.class);
     }
@@ -75,6 +82,18 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
         mRecyclerView.setAdapter(mTasksAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(null);
+        mRecyclerView.setNestedScrollingEnabled(false);
+
+        mEditDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    getPresenter().onDescriptionEditorAction();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         getPresenter().getTasks();
     }
@@ -86,9 +105,18 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     }
 
     @Override
+    public String getDescription() {
+        return mEditDescription.getText().toString();
+    }
+
+    @Override
+    public void clearDescription() {
+        mEditDescription.setText("");
+    }
+
+    @Override
     public void showProgress() {
         if (!mSwipeRefreshLayout.isRefreshing()) {
-            mRecyclerView.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.VISIBLE);
         }
     }
@@ -100,12 +128,16 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
             return;
         }
         mProgressBar.setVisibility(View.GONE);
-        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showTasks(List<TaskDTO> tasks) {
         mTasksAdapter.clearAndAddAll(tasks);
+    }
+
+    @Override
+    public void addTask(TaskDTO task) {
+        mTasksAdapter.addItem(task);
     }
 
     @Override
@@ -118,6 +150,14 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
         DialogFactory.createSimpleOkErrorDialog(this,
                 getString(R.string.dialog_error_title),
                 message)
+                .show();
+    }
+
+    @Override
+    public void showError(int messageResource) {
+        DialogFactory.createSimpleOkErrorDialog(this,
+                R.string.dialog_error_title,
+                messageResource)
                 .show();
     }
 

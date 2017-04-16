@@ -23,10 +23,18 @@
 
     <!--Widgets-->
     <style name="Widget.SignIn.EditText" parent="Widget.AppCompat.EditText">
-        <item name="colorControlNormal">@color/transparent_white</item>
+        <item name="colorControlNormal">@color/transparent_white_102</item>
         <item name="colorControlActivated">@color/white</item>
         <item name="android:editTextColor">@color/white</item>
-        <item name="android:textColorHint">@color/transparent_white</item>
+        <item name="android:textColorHint">@color/transparent_white_102</item>
+    </style>
+
+    <style name="Widget.Tasks.EditText" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/transparent_white_102</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
 </resources>

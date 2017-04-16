@@ -8,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -15,6 +16,10 @@ public interface TasksService {
 
     @GET("tasks")
     Observable<List<TaskDTO>> getTasks();
+
+    @POST("tasks/")
+    @FormUrlEncoded
+    Observable<TaskDTO> createTask(@Field("description") String description);
 
     @PATCH("tasks/{id}/")
     @FormUrlEncoded

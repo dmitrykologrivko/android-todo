@@ -7,15 +7,23 @@ import java.util.List;
 
 public interface TasksView extends MvpView {
 
+    String getDescription();
+
+    void clearDescription();
+
     void showProgress();
 
     void dismissProgress();
 
     void showTasks(List<TaskDTO> tasks);
 
+    void addTask(TaskDTO task);
+
     void updateTask(TaskDTO task);
 
     void showError(String message);
+
+    void showError(int messageResource);
 
     void showTasksEmpty();
 

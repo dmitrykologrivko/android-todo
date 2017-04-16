@@ -8,6 +8,10 @@
     <string name="sign_in_empty_email_error">Empty username</string>
     <string name="sign_in_empty_password_error">Empty password</string>
 
+    <!--Tasks-->
+    <string name="tasks_description_hint">What needs to be done?</string>
+    <string name="tasks_empty_description_error">Empty description</string>
+
     <!--Dialogs-->
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Cancel</string>
