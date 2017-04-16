@@ -14,7 +14,7 @@ import rx.Observable;
 
 public interface TasksService {
 
-    @GET("tasks")
+    @GET("tasks/")
     Observable<List<TaskDTO>> getTasks();
 
     @POST("tasks/")

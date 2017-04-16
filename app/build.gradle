@@ -82,6 +82,7 @@ dependencies {
 
     /* Debug */
     compile "com.facebook.stetho:stetho:$STETHO_VERSION"
+    compile "com.facebook.stetho:stetho-okhttp3:$STETHO_VERSION"
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //                            Instrumentation test dependencies                             //
