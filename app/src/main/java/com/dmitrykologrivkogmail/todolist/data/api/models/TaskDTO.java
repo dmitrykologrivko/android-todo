@@ -14,7 +14,7 @@ public class TaskDTO {
     private static final String UPDATED = "updated";
 
     @SerializedName(ID)
-    private int mId;
+    private long mId;
     @SerializedName(DESCRIPTION)
     private String mDescription;
     @SerializedName(IS_DONE)
@@ -26,11 +26,11 @@ public class TaskDTO {
     @SerializedName(UPDATED)
     private Date mUpdated;
 
-    public int getId() {
+    public long getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         mId = id;
     }
 

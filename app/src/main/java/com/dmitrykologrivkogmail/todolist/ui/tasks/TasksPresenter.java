@@ -51,4 +51,32 @@ public class TasksPresenter extends BasePresenter<TasksView> {
 
         addSubscription(subscription);
     }
+
+    public void markTask(long id, boolean isDone) {
+        checkViewAttached();
+
+        Subscription subscription = mDataManager.markTask(id, isDone)
+                .subscribe(new Observer<TaskDTO>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().showError(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(TaskDTO task) {
+                        getView().updateTask(task);
+                    }
+                });
+
+        addSubscription(subscription);
+    }
+
+    public void onTaskMarked(long id, boolean isDone) {
+        markTask(id, isDone);
+    }
 }

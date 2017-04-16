@@ -13,6 +13,8 @@ public interface TasksView extends MvpView {
 
     void showTasks(List<TaskDTO> tasks);
 
+    void updateTask(TaskDTO task);
+
     void showError(String message);
 
     void showTasksEmpty();

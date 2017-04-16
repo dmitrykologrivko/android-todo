@@ -10,9 +10,7 @@ import android.widget.TextView;
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.dmitrykologrivkogmail.todolist.ui.base.BaseAdapter;
 
 import javax.inject.Inject;
 
@@ -20,17 +18,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @PerActivity
-public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHolder> {
+public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHolder> {
 
-    private List<TaskDTO> mTasks;
+    private OnTaskMarkedListener mOnTaskMarkedListener;
 
     @Inject
     public TasksAdapter() {
-        mTasks = new ArrayList<>();
     }
 
-    public void setTasks(List<TaskDTO> tasks) {
-        mTasks = tasks;
+    public void setOnTaskMarkedListener(OnTaskMarkedListener listener) {
+        mOnTaskMarkedListener = listener;
     }
 
     @Override
@@ -42,14 +39,23 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
 
     @Override
     public void onBindViewHolder(TasksViewHolder holder, int position) {
-        TaskDTO task = mTasks.get(position);
-        holder.checkIsDone.setChecked(task.isDone());
-        holder.textDescription.setText(task.getDescription());
+        holder.bind(mModels.get(position),
+                mOnItemClickListener,
+                mOnTaskMarkedListener);
     }
 
     @Override
-    public int getItemCount() {
-        return mTasks.size();
+    public long getItemId(int position) {
+        return mModels.get(position).getId();
+    }
+
+    @Override
+    protected Object getModelId(TaskDTO item) {
+        return item.getId();
+    }
+
+    public interface OnTaskMarkedListener {
+        void onTaskMarked(int position, boolean isChecked);
     }
 
     class TasksViewHolder extends RecyclerView.ViewHolder {
@@ -60,9 +66,33 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TasksViewHol
         @BindView(R.id.text_description)
         TextView textDescription;
 
-        public TasksViewHolder(View itemView) {
+        TasksViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        void bind(final TaskDTO task,
+                  final OnItemClickListener itemClickListener,
+                  final OnTaskMarkedListener onTaskMarkedListener) {
+
+            checkIsDone.setChecked(task.isDone());
+            textDescription.setText(task.getDescription());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (itemClickListener != null)
+                        itemClickListener.onItemClick(getAdapterPosition());
+                }
+            });
+
+            checkIsDone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onTaskMarkedListener != null)
+                        onTaskMarkedListener.onTaskMarked(getAdapterPosition(), checkIsDone.isChecked());
+                }
+            });
         }
     }
 }

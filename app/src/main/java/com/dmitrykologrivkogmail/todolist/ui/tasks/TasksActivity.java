@@ -19,7 +19,6 @@ import com.dmitrykologrivkogmail.todolist.injection.component.TasksComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.util.DialogFactory;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -65,8 +64,17 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
         mSwipeRefreshLayout.setColorSchemeResources(R.color.accent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
+        mTasksAdapter.setOnTaskMarkedListener(new TasksAdapter.OnTaskMarkedListener() {
+            @Override
+            public void onTaskMarked(int position, boolean isChecked) {
+                long id = mTasksAdapter.getItemId(position);
+                getPresenter().onTaskMarked(id, isChecked);
+            }
+        });
+
         mRecyclerView.setAdapter(mTasksAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(null);
 
         getPresenter().getTasks();
     }
@@ -97,8 +105,12 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
     @Override
     public void showTasks(List<TaskDTO> tasks) {
-        mTasksAdapter.setTasks(tasks);
-        mTasksAdapter.notifyDataSetChanged();
+        mTasksAdapter.clearAndAddAll(tasks);
+    }
+
+    @Override
+    public void updateTask(TaskDTO task) {
+        mTasksAdapter.updateItem(task);
     }
 
     @Override
@@ -111,8 +123,7 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
     @Override
     public void showTasksEmpty() {
-        mTasksAdapter.setTasks(Collections.<TaskDTO>emptyList());
-        mTasksAdapter.notifyDataSetChanged();
+        mTasksAdapter.clear();
 
         Toast.makeText(this,
                 R.string.msg_empty_list,
