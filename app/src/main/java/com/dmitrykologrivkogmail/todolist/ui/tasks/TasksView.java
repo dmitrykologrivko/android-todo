@@ -27,4 +27,8 @@ public interface TasksView extends MvpView {
 
     void showTasksEmpty();
 
+    void runSignInActivity();
+
+    void finish();
+
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
 import com.dmitrykologrivkogmail.todolist.injection.component.TasksComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
+import com.dmitrykologrivkogmail.todolist.ui.signin.SignInActivity;
 import com.dmitrykologrivkogmail.todolist.util.DialogFactory;
 
 import java.util.List;
@@ -67,6 +69,13 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
         ButterKnife.bind(this);
 
         mToolbar.setTitle(R.string.app_name);
+        mToolbar.inflateMenu(R.menu.menu_tasks);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return getPresenter().onMenuItemClick(item);
+            }
+        });
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.accent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -169,6 +178,11 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
                 R.string.msg_empty_list,
                 Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    @Override
+    public void runSignInActivity() {
+        startActivity(SignInActivity.getStartIntent(this));
     }
 
     @Override

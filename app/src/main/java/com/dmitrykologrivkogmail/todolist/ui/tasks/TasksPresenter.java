@@ -1,5 +1,7 @@
 package com.dmitrykologrivkogmail.todolist.ui.tasks;
 
+import android.view.MenuItem;
+
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
@@ -112,11 +114,42 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         addSubscription(subscription);
     }
 
+    public void signOut() {
+        checkViewAttached();
+
+        Subscription subscription = mDataManager.signOut()
+                .subscribe(new Observer<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        getView().runSignInActivity();
+                        getView().finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Void aVoid) {
+
+                    }
+                });
+    }
+
     public void onTaskMarked(long id, boolean isDone) {
         markTask(id, isDone);
     }
 
     public void onDescriptionEditorAction() {
         createTask();
+    }
+
+    public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.action_sign_out) {
+            signOut();
+            return true;
+        }
+        return false;
     }
 }

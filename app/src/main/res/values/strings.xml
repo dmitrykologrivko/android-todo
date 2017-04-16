@@ -20,4 +20,8 @@
     <!--General messages-->
     <string name="msg_please_wait">Please wait…</string>
     <string name="msg_empty_list">List is empty</string>
+
+    <!--General actions-->
+    <string name="action_sing_out">Sign out</string>
+
 </resources>

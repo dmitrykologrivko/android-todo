@@ -39,6 +39,12 @@ public class DataManager {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<Void> signOut() {
+        return mOAuthManager.clearTokens()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<Boolean> isAuthenticated() {
         return mOAuthManager.isAuthenticated()
                 .subscribeOn(Schedulers.io())
