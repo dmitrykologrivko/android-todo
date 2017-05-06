@@ -1,6 +1,7 @@
 package com.dmitrykologrivkogmail.todolist.ui.base;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +57,25 @@ public abstract class BaseAdapter<M, H extends RecyclerView.ViewHolder> extends 
         }
     }
 
+    public void updateItem(int position, M item) {
+        if (position >= 0 && mModels.size() >= position + 1) {
+            mModels.remove(position);
+            mModels.add(position, item);
+            notifyItemChanged(position);
+        }
+    }
+
     public void removeItem(M item) {
         int position = getItemPosition(item);
         if (position >= 0) {
             mModels.remove(item);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void removeItem(int position) {
+        if (position >= 0 && mModels.size() >= position + 1) {
+            mModels.remove(position);
             notifyItemRemoved(position);
         }
     }
@@ -90,6 +106,6 @@ public abstract class BaseAdapter<M, H extends RecyclerView.ViewHolder> extends 
     protected abstract Object getModelId(M item);
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(View view, int position);
     }
 }

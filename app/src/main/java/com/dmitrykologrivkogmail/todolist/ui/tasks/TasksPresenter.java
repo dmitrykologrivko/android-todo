@@ -1,7 +1,5 @@
 package com.dmitrykologrivkogmail.todolist.ui.tasks;
 
-import android.view.MenuItem;
-
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
@@ -27,6 +25,8 @@ public class TasksPresenter extends BasePresenter<TasksView> {
     public void getTasks() {
         checkViewAttached();
 
+        getView().showProgress();
+
         Subscription subscription = mDataManager.getTasks()
                 .subscribe(new Observer<List<TaskDTO>>() {
                     @Override
@@ -50,15 +50,13 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     }
                 });
 
-        getView().showProgress();
-
         addSubscription(subscription);
     }
 
-    public void markTask(long id, boolean isDone) {
+    public void markTask(TaskDTO task) {
         checkViewAttached();
 
-        Subscription subscription = mDataManager.markTask(id, isDone)
+        Subscription subscription = mDataManager.markTask(task.getId(), !task.isDone())
                 .subscribe(new Observer<TaskDTO>() {
                     @Override
                     public void onCompleted() {
@@ -89,6 +87,8 @@ public class TasksPresenter extends BasePresenter<TasksView> {
             return;
         }
 
+        getView().showProgress();
+
         Subscription subscription = mDataManager.createTask(description)
                 .subscribe(new Observer<TaskDTO>() {
                     @Override
@@ -108,8 +108,6 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                         getView().addTask(task);
                     }
                 });
-
-        getView().showProgress();
 
         addSubscription(subscription);
     }
@@ -135,21 +133,27 @@ public class TasksPresenter extends BasePresenter<TasksView> {
 
                     }
                 });
+
+        addSubscription(subscription);
     }
 
-    public void onTaskMarked(long id, boolean isDone) {
-        markTask(id, isDone);
+    public void onCreate() {
+        getTasks();
     }
 
-    public void onDescriptionEditorAction() {
+    public void onRefresh() {
+        getTasks();
+    }
+
+    public void onTaskMarked(TaskDTO task) {
+        markTask(task);
+    }
+
+    public void onDescriptionTyped() {
         createTask();
     }
 
-    public boolean onMenuItemClick(MenuItem item) {
-        if (item.getItemId() == R.id.action_sign_out) {
-            signOut();
-            return true;
-        }
-        return false;
+    public void onSignOutMenuClicked() {
+        signOut();
     }
 }

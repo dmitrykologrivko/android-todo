@@ -73,7 +73,11 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return getPresenter().onMenuItemClick(item);
+                if (item.getItemId() == R.id.action_sign_out) {
+                    getPresenter().onSignOutMenuClicked();
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -82,9 +86,8 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
         mTasksAdapter.setOnTaskMarkedListener(new TasksAdapter.OnTaskMarkedListener() {
             @Override
-            public void onTaskMarked(int position, boolean isChecked) {
-                long id = mTasksAdapter.getItemId(position);
-                getPresenter().onTaskMarked(id, isChecked);
+            public void onTaskMarked(TaskDTO task) {
+                getPresenter().onTaskMarked(task);
             }
         });
 
@@ -97,14 +100,14 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    getPresenter().onDescriptionEditorAction();
+                    getPresenter().onDescriptionTyped();
                     return true;
                 }
                 return false;
             }
         });
 
-        getPresenter().getTasks();
+        getPresenter().onCreate();
     }
 
     @NonNull
@@ -187,6 +190,6 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
     @Override
     public void onRefresh() {
-        getPresenter().getTasks();
+        getPresenter().onRefresh();
     }
 }

@@ -20,10 +20,16 @@ import butterknife.ButterKnife;
 @PerActivity
 public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHolder> {
 
+    private OnTaskClickListener mOnTaskClickListener;
+
     private OnTaskMarkedListener mOnTaskMarkedListener;
 
     @Inject
     public TasksAdapter() {
+    }
+
+    public void setOnTaskClickListener(OnTaskClickListener onTaskClickListener) {
+        mOnTaskClickListener = onTaskClickListener;
     }
 
     public void setOnTaskMarkedListener(OnTaskMarkedListener listener) {
@@ -40,7 +46,7 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
     @Override
     public void onBindViewHolder(TasksViewHolder holder, int position) {
         holder.bind(mModels.get(position),
-                mOnItemClickListener,
+                mOnTaskClickListener,
                 mOnTaskMarkedListener);
     }
 
@@ -54,8 +60,12 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
         return item.getId();
     }
 
+    public interface OnTaskClickListener {
+        void onTaskClicked(TaskDTO task);
+    }
+
     public interface OnTaskMarkedListener {
-        void onTaskMarked(int position, boolean isChecked);
+        void onTaskMarked(TaskDTO task);
     }
 
     class TasksViewHolder extends RecyclerView.ViewHolder {
@@ -72,7 +82,7 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
         }
 
         void bind(final TaskDTO task,
-                  final OnItemClickListener itemClickListener,
+                  final OnTaskClickListener itemClickListener,
                   final OnTaskMarkedListener onTaskMarkedListener) {
 
             checkIsDone.setChecked(task.isDone());
@@ -82,7 +92,7 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
                 @Override
                 public void onClick(View view) {
                     if (itemClickListener != null)
-                        itemClickListener.onItemClick(getAdapterPosition());
+                        itemClickListener.onTaskClicked(task);
                 }
             });
 
@@ -90,7 +100,7 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
                 @Override
                 public void onClick(View view) {
                     if (onTaskMarkedListener != null)
-                        onTaskMarkedListener.onTaskMarked(getAdapterPosition(), checkIsDone.isChecked());
+                        onTaskMarkedListener.onTaskMarked(task);
                 }
             });
         }
