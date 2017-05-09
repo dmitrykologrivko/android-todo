@@ -21,6 +21,12 @@ public interface TasksView extends MvpView {
 
     void updateTask(TaskDTO task);
 
+    void removeTask(TaskDTO task);
+
+    void showEditDialog(TaskDTO task);
+
+    void showDeleteDialog(TaskDTO task);
+
     void showError(String message);
 
     void showError(int messageResource);

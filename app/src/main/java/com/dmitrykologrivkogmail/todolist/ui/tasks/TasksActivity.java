@@ -1,6 +1,8 @@
 package com.dmitrykologrivkogmail.todolist.ui.tasks;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -148,6 +151,54 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     @Override
     public void updateTask(TaskDTO task) {
         mTasksAdapter.updateItem(task);
+    }
+
+    @Override
+    public void removeTask(TaskDTO task) {
+        mTasksAdapter.removeItem(task);
+    }
+
+    @Override
+    public void showEditDialog(final TaskDTO task) {
+        LayoutInflater inflater = getLayoutInflater();
+        View editDialog = inflater.inflate(R.layout.dialog_edit, null);
+
+        final EditText editText = (EditText) editDialog.findViewById(R.id.edit_text);
+        editText.setText(task.getDescription());
+        editText.setSelection(editText.getText().length());
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tasks_dialog_edit_title)
+                .setView(editDialog)
+                .setNegativeButton(R.string.dialog_action_cancel, null)
+                .setNeutralButton(R.string.dialog_action_delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getPresenter().onDeleteClick(task);
+                    }
+                })
+                .setPositiveButton(R.string.dialog_action_edit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getPresenter().editTask(task, editText.getText().toString());
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void showDeleteDialog(final TaskDTO task) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tasks_dialog_delete_title)
+                .setMessage(R.string.tasks_dialog_delete_message)
+                .setNegativeButton(R.string.dialog_action_no, null)
+                .setPositiveButton(R.string.dialog_action_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getPresenter().deleteTask(task);
+                    }
+                })
+                .show();
     }
 
     @Override

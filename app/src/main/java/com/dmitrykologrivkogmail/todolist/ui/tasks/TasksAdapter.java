@@ -69,7 +69,7 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    mPresenter.onTaskClick(task);
                 }
             });
 

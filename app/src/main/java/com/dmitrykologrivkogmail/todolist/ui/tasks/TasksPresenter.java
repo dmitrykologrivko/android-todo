@@ -97,6 +97,40 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         addSubscription(subscription);
     }
 
+    public void editTask(TaskDTO task, String description) {
+        checkViewAttached();
+
+        if (description == null || description.isEmpty()) {
+            getView().showError(R.string.tasks_empty_description_error);
+            return;
+        }
+
+        task.setDescription(description);
+
+        getView().showProgress();
+
+        Subscription subscription = mDataManager.editTask(task)
+                .subscribe(new Observer<TaskDTO>() {
+                    @Override
+                    public void onCompleted() {
+                        getView().dismissProgress();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().dismissProgress();
+                        getView().showError(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(TaskDTO task) {
+                        getView().updateTask(task);
+                    }
+                });
+
+        addSubscription(subscription);
+    }
+
     public void markTask(TaskDTO task) {
         checkViewAttached();
 
@@ -117,6 +151,33 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onNext(TaskDTO task) {
                         getView().updateTask(task);
+                    }
+                });
+
+        addSubscription(subscription);
+    }
+
+    public void deleteTask(TaskDTO task) {
+        checkViewAttached();
+
+        getView().showProgress();
+
+        Subscription subscription = mDataManager.deleteTask(task)
+                .subscribe(new Observer<TaskDTO>() {
+                    @Override
+                    public void onCompleted() {
+                        getView().dismissProgress();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().dismissProgress();
+                        getView().showError(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(TaskDTO task) {
+                        getView().removeTask(task);
                     }
                 });
 
@@ -146,6 +207,14 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                 });
 
         addSubscription(subscription);
+    }
+
+    public void onTaskClick(TaskDTO task) {
+        getView().showEditDialog(task);
+    }
+
+    public void onDeleteClick(TaskDTO task) {
+        getView().showDeleteDialog(task);
     }
 
     private boolean isTasksEmpty() {

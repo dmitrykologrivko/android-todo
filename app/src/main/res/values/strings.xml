@@ -11,10 +11,17 @@
     <!--Tasks-->
     <string name="tasks_description_hint">What needs to be done?</string>
     <string name="tasks_empty_description_error">Empty description</string>
+    <string name="tasks_dialog_edit_title">Edit task</string>
+    <string name="tasks_dialog_delete_title">Delete task</string>
+    <string name="tasks_dialog_delete_message">Are you sure want to delete this task?</string>
 
     <!--Dialogs-->
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_action_edit">Edit</string>
+    <string name="dialog_action_delete">Delete</string>
+    <string name="dialog_action_yes">Yes</string>
+    <string name="dialog_action_no">No</string>
     <string name="dialog_error_title">Sorry</string>
 
     <!--General messages-->

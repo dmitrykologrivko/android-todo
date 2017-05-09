@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 @PerApplication
@@ -63,10 +64,28 @@ public class DataManager {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<TaskDTO> editTask(TaskDTO task) {
+        return mTasksService.editTask(task.getId(), task.getDescription())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<TaskDTO> markTask(TaskDTO task) {
         return mTasksService.markTask(task.getId(), task.isDone())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<TaskDTO> deleteTask(final TaskDTO task) {
+        return mTasksService.deleteTask(task.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new Func1<Void, Observable<TaskDTO>>() {
+                    @Override
+                    public Observable<TaskDTO> call(Void aVoid) {
+                        return Observable.just(task);
+                    }
+                });
     }
 
     @SuppressWarnings("unchecked")
