@@ -20,20 +20,11 @@ import butterknife.ButterKnife;
 @PerActivity
 public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHolder> {
 
-    private OnTaskClickListener mOnTaskClickListener;
-
-    private OnTaskMarkedListener mOnTaskMarkedListener;
+    private TasksPresenter mPresenter;
 
     @Inject
-    public TasksAdapter() {
-    }
-
-    public void setOnTaskClickListener(OnTaskClickListener onTaskClickListener) {
-        mOnTaskClickListener = onTaskClickListener;
-    }
-
-    public void setOnTaskMarkedListener(OnTaskMarkedListener listener) {
-        mOnTaskMarkedListener = listener;
+    public TasksAdapter(TasksPresenter presenter) {
+        mPresenter = presenter;
     }
 
     @Override
@@ -45,9 +36,7 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
 
     @Override
     public void onBindViewHolder(TasksViewHolder holder, int position) {
-        holder.bind(mModels.get(position),
-                mOnTaskClickListener,
-                mOnTaskMarkedListener);
+        holder.bind(mModels.get(position));
     }
 
     @Override
@@ -58,14 +47,6 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
     @Override
     protected Object getModelId(TaskDTO item) {
         return item.getId();
-    }
-
-    public interface OnTaskClickListener {
-        void onTaskClicked(TaskDTO task);
-    }
-
-    public interface OnTaskMarkedListener {
-        void onTaskMarked(TaskDTO task);
     }
 
     class TasksViewHolder extends RecyclerView.ViewHolder {
@@ -81,26 +62,21 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(final TaskDTO task,
-                  final OnTaskClickListener itemClickListener,
-                  final OnTaskMarkedListener onTaskMarkedListener) {
-
+        void bind(final TaskDTO task) {
             checkIsDone.setChecked(task.isDone());
             textDescription.setText(task.getDescription());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (itemClickListener != null)
-                        itemClickListener.onTaskClicked(task);
+
                 }
             });
 
             checkIsDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (onTaskMarkedListener != null)
-                        onTaskMarkedListener.onTaskMarked(task);
+                    mPresenter.markTask(task);
                 }
             });
         }

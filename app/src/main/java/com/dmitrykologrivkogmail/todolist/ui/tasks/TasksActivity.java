@@ -74,7 +74,7 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.action_sign_out) {
-                    getPresenter().onSignOutMenuClicked();
+                    getPresenter().signOut();
                     return true;
                 }
                 return false;
@@ -83,13 +83,6 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.accent);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-
-        mTasksAdapter.setOnTaskMarkedListener(new TasksAdapter.OnTaskMarkedListener() {
-            @Override
-            public void onTaskMarked(TaskDTO task) {
-                getPresenter().onTaskMarked(task);
-            }
-        });
 
         mRecyclerView.setAdapter(mTasksAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -100,14 +93,14 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    getPresenter().onDescriptionTyped();
+                    getPresenter().createTask();
                     return true;
                 }
                 return false;
             }
         });
 
-        getPresenter().onCreate();
+        getPresenter().getTasks();
     }
 
     @NonNull
@@ -144,7 +137,7 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
     @Override
     public void showTasks(List<TaskDTO> tasks) {
-        mTasksAdapter.clearAndAddAll(tasks);
+        mTasksAdapter.setModels(tasks);
     }
 
     @Override
@@ -190,6 +183,6 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
 
     @Override
     public void onRefresh() {
-        getPresenter().onRefresh();
+        getPresenter().getTasks();
     }
 }

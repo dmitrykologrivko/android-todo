@@ -17,6 +17,8 @@ import rx.subscriptions.CompositeSubscription;
 @PerActivity
 public class TasksPresenter extends BasePresenter<TasksView> {
 
+    private List<TaskDTO> mTasks;
+
     @Inject
     public TasksPresenter(CompositeSubscription cs, DataManager dataManager) {
         super(cs, dataManager);
@@ -42,35 +44,13 @@ public class TasksPresenter extends BasePresenter<TasksView> {
 
                     @Override
                     public void onNext(List<TaskDTO> tasks) {
-                        if (tasks.isEmpty()) {
+                        mTasks = tasks;
+
+                        if (isTasksEmpty()) {
                             getView().showTasksEmpty();
                         } else {
-                            getView().showTasks(tasks);
+                            getView().showTasks(mTasks);
                         }
-                    }
-                });
-
-        addSubscription(subscription);
-    }
-
-    public void markTask(TaskDTO task) {
-        checkViewAttached();
-
-        Subscription subscription = mDataManager.markTask(task.getId(), !task.isDone())
-                .subscribe(new Observer<TaskDTO>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        getView().showError(e.toString());
-                    }
-
-                    @Override
-                    public void onNext(TaskDTO task) {
-                        getView().updateTask(task);
                     }
                 });
 
@@ -87,9 +67,14 @@ public class TasksPresenter extends BasePresenter<TasksView> {
             return;
         }
 
+        TaskDTO task = new TaskDTO.Builder()
+                .description(description)
+                .done(false)
+                .build();
+
         getView().showProgress();
 
-        Subscription subscription = mDataManager.createTask(description)
+        Subscription subscription = mDataManager.createTask(task)
                 .subscribe(new Observer<TaskDTO>() {
                     @Override
                     public void onCompleted() {
@@ -106,6 +91,32 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onNext(TaskDTO task) {
                         getView().addTask(task);
+                    }
+                });
+
+        addSubscription(subscription);
+    }
+
+    public void markTask(TaskDTO task) {
+        checkViewAttached();
+
+        task.setDone(!task.isDone());
+
+        Subscription subscription = mDataManager.markTask(task)
+                .subscribe(new Observer<TaskDTO>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().showError(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(TaskDTO task) {
+                        getView().updateTask(task);
                     }
                 });
 
@@ -137,23 +148,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         addSubscription(subscription);
     }
 
-    public void onCreate() {
-        getTasks();
-    }
-
-    public void onRefresh() {
-        getTasks();
-    }
-
-    public void onTaskMarked(TaskDTO task) {
-        markTask(task);
-    }
-
-    public void onDescriptionTyped() {
-        createTask();
-    }
-
-    public void onSignOutMenuClicked() {
-        signOut();
+    private boolean isTasksEmpty() {
+        return mTasks == null || mTasks.isEmpty();
     }
 }

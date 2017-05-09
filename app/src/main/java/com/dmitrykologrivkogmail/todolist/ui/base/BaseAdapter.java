@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class BaseAdapter<M, H extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<H> {
 
-    protected final List<M> mModels;
+    protected List<M> mModels;
 
     protected OnItemClickListener mOnItemClickListener;
 
@@ -18,6 +18,11 @@ public abstract class BaseAdapter<M, H extends RecyclerView.ViewHolder> extends 
 
     public BaseAdapter(List<M> data) {
         mModels = data;
+    }
+
+    public void setModels(List<M> models) {
+        mModels = models;
+        notifyDataSetChanged();
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

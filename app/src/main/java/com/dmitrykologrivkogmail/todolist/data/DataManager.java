@@ -57,14 +57,14 @@ public class DataManager {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<TaskDTO> markTask(long id, boolean isDone) {
-        return mTasksService.markTask(id, isDone)
+    public Observable<TaskDTO> createTask(TaskDTO task) {
+        return mTasksService.createTask(task.getDescription())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<TaskDTO> createTask(String description) {
-        return mTasksService.createTask(description)
+    public Observable<TaskDTO> markTask(TaskDTO task) {
+        return mTasksService.markTask(task.getId(), task.isDone())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
