@@ -213,7 +213,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         getView().showEditDialog(task);
     }
 
-    public void onDeleteClick(TaskDTO task) {
+    public void onDeleteButtonClick(TaskDTO task) {
         getView().showDeleteDialog(task);
     }
 
