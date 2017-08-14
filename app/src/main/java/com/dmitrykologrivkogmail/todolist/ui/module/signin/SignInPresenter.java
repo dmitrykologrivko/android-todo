@@ -3,7 +3,7 @@ package com.dmitrykologrivkogmail.todolist.ui.module.signin;
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.AuthorizationManager;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TokenDTO;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerActivity;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
 import javax.inject.Inject;

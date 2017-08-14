@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.injection.module;
+package com.dmitrykologrivkogmail.todolist.di.module;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,9 +10,9 @@ import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthAuthenticator;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthInterceptor;
 import com.dmitrykologrivkogmail.todolist.data.api.services.TasksService;
 import com.dmitrykologrivkogmail.todolist.data.preferences.CredentialsHelper;
-import com.dmitrykologrivkogmail.todolist.injection.IoScheduler;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
-import com.dmitrykologrivkogmail.todolist.injection.UiScheduler;
+import com.dmitrykologrivkogmail.todolist.di.IoScheduler;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerApplication;
+import com.dmitrykologrivkogmail.todolist.di.UiScheduler;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.securepreferences.SecurePreferences;

@@ -1,7 +1,7 @@
 package com.dmitrykologrivkogmail.todolist.ui.module.splash;
 
 import com.dmitrykologrivkogmail.todolist.data.AuthorizationManager;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerActivity;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
 import java.util.concurrent.TimeUnit;

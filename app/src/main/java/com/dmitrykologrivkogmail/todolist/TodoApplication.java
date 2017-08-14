@@ -2,9 +2,9 @@ package com.dmitrykologrivkogmail.todolist;
 
 import android.app.Application;
 
-import com.dmitrykologrivkogmail.todolist.injection.component.ApplicationComponent;
-import com.dmitrykologrivkogmail.todolist.injection.component.DaggerApplicationComponent;
-import com.dmitrykologrivkogmail.todolist.injection.module.ApplicationModule;
+import com.dmitrykologrivkogmail.todolist.di.component.ApplicationComponent;
+import com.dmitrykologrivkogmail.todolist.di.component.DaggerApplicationComponent;
+import com.dmitrykologrivkogmail.todolist.di.module.ApplicationModule;
 import com.facebook.stetho.Stetho;
 
 public class TodoApplication extends Application {

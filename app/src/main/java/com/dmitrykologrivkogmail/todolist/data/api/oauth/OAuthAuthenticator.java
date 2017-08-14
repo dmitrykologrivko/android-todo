@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.dmitrykologrivkogmail.todolist.data.api.models.TokenDTO;
 import com.dmitrykologrivkogmail.todolist.data.preferences.CredentialsHelper;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerApplication;
 
 import java.io.IOException;
 

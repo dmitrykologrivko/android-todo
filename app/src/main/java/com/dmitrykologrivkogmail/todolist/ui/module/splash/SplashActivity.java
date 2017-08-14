@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
-import com.dmitrykologrivkogmail.todolist.injection.component.SplashComponent;
+import com.dmitrykologrivkogmail.todolist.di.component.SplashComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.module.signin.SignInActivity;
 import com.dmitrykologrivkogmail.todolist.ui.module.tasks.TasksActivity;

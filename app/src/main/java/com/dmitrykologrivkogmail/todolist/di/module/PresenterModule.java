@@ -1,6 +1,6 @@
-package com.dmitrykologrivkogmail.todolist.injection.module;
+package com.dmitrykologrivkogmail.todolist.di.module;
 
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerActivity;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerActivity;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,7 +1,7 @@
-package com.dmitrykologrivkogmail.todolist.injection.component;
+package com.dmitrykologrivkogmail.todolist.di.component;
 
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerActivity;
-import com.dmitrykologrivkogmail.todolist.injection.module.PresenterModule;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerActivity;
+import com.dmitrykologrivkogmail.todolist.di.module.PresenterModule;
 import com.dmitrykologrivkogmail.todolist.ui.module.tasks.TasksActivity;
 import com.dmitrykologrivkogmail.todolist.ui.module.tasks.TasksPresenter;
 

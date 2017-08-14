@@ -3,7 +3,7 @@ package com.dmitrykologrivkogmail.todolist.data.preferences;
 import android.content.SharedPreferences;
 
 import com.dmitrykologrivkogmail.todolist.data.api.models.TokenDTO;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerApplication;
 
 import java.util.concurrent.Callable;
 

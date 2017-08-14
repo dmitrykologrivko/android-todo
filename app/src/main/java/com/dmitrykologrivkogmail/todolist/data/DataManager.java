@@ -4,9 +4,9 @@ import com.dmitrykologrivkogmail.todolist.data.api.services.TasksService;
 import com.dmitrykologrivkogmail.todolist.data.mappers.TaskMapper;
 import com.dmitrykologrivkogmail.todolist.data.mappers.TasksListMapper;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
-import com.dmitrykologrivkogmail.todolist.injection.IoScheduler;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
-import com.dmitrykologrivkogmail.todolist.injection.UiScheduler;
+import com.dmitrykologrivkogmail.todolist.di.IoScheduler;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerApplication;
+import com.dmitrykologrivkogmail.todolist.di.UiScheduler;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.injection;
+package com.dmitrykologrivkogmail.todolist.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

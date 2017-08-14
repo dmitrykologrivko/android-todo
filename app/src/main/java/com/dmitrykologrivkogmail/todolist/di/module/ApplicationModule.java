@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.injection.module;
+package com.dmitrykologrivkogmail.todolist.di.module;
 
 import android.app.Application;
 import android.content.Context;

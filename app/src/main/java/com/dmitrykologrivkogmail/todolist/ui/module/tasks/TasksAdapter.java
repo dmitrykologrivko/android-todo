@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerActivity;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseAdapter;
 import com.dmitrykologrivkogmail.todolist.common.util.MultiComparator;
 

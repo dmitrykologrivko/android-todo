@@ -2,7 +2,7 @@ package com.dmitrykologrivkogmail.todolist.data.mappers;
 
 import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
-import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerApplication;
 
 import java.util.List;
 

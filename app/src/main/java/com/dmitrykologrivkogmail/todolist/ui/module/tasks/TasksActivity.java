@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
-import com.dmitrykologrivkogmail.todolist.injection.component.TasksComponent;
+import com.dmitrykologrivkogmail.todolist.di.component.TasksComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.module.signin.SignInActivity;
 import com.dmitrykologrivkogmail.todolist.common.util.DialogFactory;
