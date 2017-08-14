@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.common.utils;
+package com.dmitrykologrivkogmail.todolist.common.util;
 
 import java.util.Arrays;
 import java.util.Collections;
