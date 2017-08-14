@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface TasksService {
@@ -24,8 +25,11 @@ public interface TasksService {
     String DESCRIPTION = "description";
     String IS_DONE = "is_done";
 
+    // Params
+    String ORDERING = "ordering";
+
     @GET(TASKS_LIST_URL)
-    Observable<List<TaskDTO>> getTasks();
+    Observable<List<TaskDTO>> getTasks(@Query(ORDERING) String ordering);
 
     @POST(TASKS_LIST_URL)
     @FormUrlEncoded

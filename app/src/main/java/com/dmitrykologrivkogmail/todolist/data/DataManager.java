@@ -53,7 +53,7 @@ public class DataManager {
     }
 
     public Observable<List<TaskDTO>> getTasks() {
-        return mTasksService.getTasks()
+        return mTasksService.getTasks(TasksService.IS_DONE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
