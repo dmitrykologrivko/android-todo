@@ -11,6 +11,7 @@ import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseAdapter;
+import com.dmitrykologrivkogmail.todolist.util.MultiComparator;
 
 import javax.inject.Inject;
 
@@ -47,6 +48,13 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
     @Override
     protected Object getModelId(TaskDTO item) {
         return item.getId();
+    }
+
+    public void sortTasks() {
+        MultiComparator.sort(mModels,
+                new TaskDTO.IsDoneComparator(),
+                new TaskDTO.CreatedComparator());
+        notifyDataSetChanged();
     }
 
     class TasksViewHolder extends RecyclerView.ViewHolder {

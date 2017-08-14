@@ -17,6 +17,8 @@ public interface TasksView extends MvpView {
 
     void showTasks(List<TaskDTO> tasks);
 
+    void sortTasks();
+
     void addTask(TaskDTO task);
 
     void updateTask(TaskDTO task);

@@ -91,6 +91,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onNext(TaskDTO task) {
                         getView().addTask(task);
+                        getView().sortTasks();
                     }
                 });
 
@@ -151,6 +152,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onNext(TaskDTO task) {
                         getView().updateTask(task);
+                        getView().sortTasks();
                     }
                 });
 

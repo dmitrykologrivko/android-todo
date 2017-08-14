@@ -143,6 +143,11 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     }
 
     @Override
+    public void sortTasks() {
+        mTasksAdapter.sortTasks();
+    }
+
+    @Override
     public void addTask(TaskDTO task) {
         mTasksAdapter.addItem(task);
     }
