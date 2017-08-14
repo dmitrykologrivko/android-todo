@@ -1,9 +1,11 @@
 package com.dmitrykologrivkogmail.todolist.injection.module;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.dmitrykologrivkogmail.todolist.common.constant.Injection;
 import com.dmitrykologrivkogmail.todolist.common.constant.config.ApiConfig;
+import com.dmitrykologrivkogmail.todolist.common.util.DeviceUtil;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthAuthenticator;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthInterceptor;
 import com.dmitrykologrivkogmail.todolist.data.api.services.TasksService;
@@ -13,6 +15,7 @@ import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
 import com.dmitrykologrivkogmail.todolist.injection.UiScheduler;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
+import com.securepreferences.SecurePreferences;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -80,9 +83,10 @@ public class DataModule {
 
     @Provides
     @PerApplication
-    CredentialsHelper provideCredentialsHelper(Context context) {
-        return new CredentialsHelper(context.getSharedPreferences(CredentialsHelper.PREF_FILE_NAME,
-                Context.MODE_PRIVATE));
+    SharedPreferences provideSharedPreferences(Context ctx) {
+        return new SecurePreferences(ctx,
+                DeviceUtil.getDeviceId(ctx),
+                CredentialsHelper.PREF_FILE_NAME);
     }
 
     @Provides
