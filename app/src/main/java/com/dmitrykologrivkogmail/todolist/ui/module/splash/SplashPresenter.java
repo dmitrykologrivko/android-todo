@@ -1,6 +1,6 @@
 package com.dmitrykologrivkogmail.todolist.ui.module.splash;
 
-import com.dmitrykologrivkogmail.todolist.data.DataManager;
+import com.dmitrykologrivkogmail.todolist.data.AuthorizationManager;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
@@ -15,15 +15,18 @@ import rx.subscriptions.CompositeSubscription;
 @PerActivity
 public class SplashPresenter extends BasePresenter<SplashView> {
 
+    private final AuthorizationManager mAuthorizationManager;
+
     @Inject
-    public SplashPresenter(CompositeSubscription cs, DataManager dataManager) {
-        super(cs, dataManager);
+    public SplashPresenter(CompositeSubscription cs, AuthorizationManager am) {
+        super(cs);
+        mAuthorizationManager = am;
     }
 
     public void isAuthenticated() {
         checkViewAttached();
 
-        Subscription subscription = mDataManager.isAuthenticated()
+        Subscription subscription = mAuthorizationManager.isAuthenticated()
                 .delay(1, TimeUnit.SECONDS)
                 .subscribe(new Observer<Boolean>() {
                     @Override

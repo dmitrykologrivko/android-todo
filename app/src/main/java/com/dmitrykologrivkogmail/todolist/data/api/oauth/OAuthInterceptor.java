@@ -1,29 +1,40 @@
 package com.dmitrykologrivkogmail.todolist.data.api.oauth;
 
+import android.support.annotation.NonNull;
+
+import com.dmitrykologrivkogmail.todolist.data.preferences.CredentialsHelper;
+import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+
 import java.io.IOException;
+
+import javax.inject.Inject;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+@PerApplication
 public class OAuthInterceptor implements Interceptor {
 
-    private static final String HEADER_AUTHORIZATION = "Authorization";
+    static final String HEADER_AUTHORIZATION = "Authorization";
 
-    private final OAuthManager mManager;
+    private final CredentialsHelper mHelper;
 
-    public OAuthInterceptor(OAuthManager manager) {
-        mManager = manager;
+    @Inject
+    public OAuthInterceptor(CredentialsHelper helper) {
+        mHelper = helper;
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
 
-        String tokenType =
-                mManager.getStore().getTokenType();
-        String accessToken =
-                mManager.getStore().getAccessToken();
+        String tokenType = mHelper.getTokenType()
+                .toBlocking()
+                .first();
+        String accessToken = mHelper.getAccessToken()
+                .toBlocking()
+                .first();
 
         accessToken = String.format("%s:%s", tokenType, accessToken);
 

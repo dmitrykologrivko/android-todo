@@ -1,8 +1,8 @@
-package com.dmitrykologrivkogmail.todolist.data.api.oauth;
+package com.dmitrykologrivkogmail.todolist.data.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OAuthResponse {
+public class TokenDTO {
 
     private static final String ACCESS_TOKEN = "access_token";
     private static final String SCOPE = "scope";

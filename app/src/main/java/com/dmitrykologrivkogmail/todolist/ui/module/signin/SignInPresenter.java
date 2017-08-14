@@ -1,8 +1,8 @@
 package com.dmitrykologrivkogmail.todolist.ui.module.signin;
 
 import com.dmitrykologrivkogmail.todolist.R;
-import com.dmitrykologrivkogmail.todolist.data.DataManager;
-import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthResponse;
+import com.dmitrykologrivkogmail.todolist.data.AuthorizationManager;
+import com.dmitrykologrivkogmail.todolist.data.api.models.TokenDTO;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
@@ -15,9 +15,12 @@ import rx.subscriptions.CompositeSubscription;
 @PerActivity
 public class SignInPresenter extends BasePresenter<SignInView> {
 
+    private final AuthorizationManager mAuthorizationManager;
+
     @Inject
-    public SignInPresenter(CompositeSubscription cs, DataManager dataManager) {
-        super(cs, dataManager);
+    public SignInPresenter(CompositeSubscription cs, AuthorizationManager am) {
+        super(cs);
+        mAuthorizationManager = am;
     }
 
     public void signIn() {
@@ -35,8 +38,8 @@ public class SignInPresenter extends BasePresenter<SignInView> {
             return;
         }
 
-        Subscription subscription = mDataManager.signIn(username, password)
-                .subscribe(new Observer<OAuthResponse>() {
+        Subscription subscription = mAuthorizationManager.signIn(username, password)
+                .subscribe(new Observer<TokenDTO>() {
                     @Override
                     public void onCompleted() {
                         getView().dismissProgress();
@@ -51,7 +54,7 @@ public class SignInPresenter extends BasePresenter<SignInView> {
                     }
 
                     @Override
-                    public void onNext(OAuthResponse response) {
+                    public void onNext(TokenDTO response) {
 
                     }
                 });

@@ -1,28 +1,26 @@
 package com.dmitrykologrivkogmail.todolist.data;
 
-import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthManager;
-import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthResponse;
 import com.dmitrykologrivkogmail.todolist.data.api.services.TasksService;
 import com.dmitrykologrivkogmail.todolist.data.mappers.TaskMapper;
 import com.dmitrykologrivkogmail.todolist.data.mappers.TasksListMapper;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
+import com.dmitrykologrivkogmail.todolist.injection.IoScheduler;
 import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+import com.dmitrykologrivkogmail.todolist.injection.UiScheduler;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
+import rx.Scheduler;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 @PerApplication
 public class DataManager {
 
-    private final Observable.Transformer mSchedulersTransformer;
-
-    private final OAuthManager mOAuthManager;
+    private final Scheduler mUiThread;
+    private final Scheduler mIoThread;
 
     private TasksService mTasksService;
 
@@ -30,55 +28,41 @@ public class DataManager {
     private TasksListMapper mTasksListMapper;
 
     @Inject
-    public DataManager(OAuthManager manager,
+    public DataManager(@UiScheduler Scheduler uiThread,
+                       @IoScheduler Scheduler ioThread,
                        TasksService tasksService,
                        TaskMapper taskMapper,
                        TasksListMapper tasksListMapper) {
 
-        mOAuthManager = manager;
+        mUiThread = uiThread;
+        mIoThread = ioThread;
         mTasksService = tasksService;
-        mSchedulersTransformer = null;
         mTaskMapper = taskMapper;
         mTasksListMapper = tasksListMapper;
-    }
-
-    public Observable<OAuthResponse> signIn(String username, String password) {
-        return mOAuthManager.getAccessToken(username, password)
-                .compose(new AsyncTransformer<OAuthResponse>());
-    }
-
-    public Observable<Void> signOut() {
-        return mOAuthManager.clearTokens()
-                .compose(new AsyncTransformer<Void>());
-    }
-
-    public Observable<Boolean> isAuthenticated() {
-        return mOAuthManager.isAuthenticated()
-                .compose(new AsyncTransformer<Boolean>());
     }
 
     public Observable<List<Task>> getTasks() {
         return mTasksService.getTasks(Task.Ordering.IS_DONE.toString())
                 .map(mTasksListMapper)
-                .compose(new AsyncTransformer<List<Task>>());
+                .compose(new AsyncTransformer<List<Task>>(mUiThread, mIoThread));
     }
 
     public Observable<Task> createTask(Task task) {
         return mTasksService.createTask(task.getDescription())
                 .map(mTaskMapper)
-                .compose(new AsyncTransformer<Task>());
+                .compose(new AsyncTransformer<Task>(mUiThread, mIoThread));
     }
 
     public Observable<Task> editTask(Task task) {
         return mTasksService.editTask(task.getId(), task.getDescription())
                 .map(mTaskMapper)
-                .compose(new AsyncTransformer<Task>());
+                .compose(new AsyncTransformer<Task>(mUiThread, mIoThread));
     }
 
     public Observable<Task> markTask(Task task) {
         return mTasksService.markTask(task.getId(), task.isDone())
                 .map(mTaskMapper)
-                .compose(new AsyncTransformer<Task>());
+                .compose(new AsyncTransformer<Task>(mUiThread, mIoThread));
     }
 
     public Observable<Task> deleteTask(final Task task) {
@@ -89,16 +73,6 @@ public class DataManager {
                         return Observable.just(task);
                     }
                 })
-                .compose(new AsyncTransformer<Task>());
-    }
-
-    private class AsyncTransformer<T> implements Observable.Transformer<T, T> {
-
-        @Override
-        public Observable<T> call(Observable<T> observable) {
-            return observable
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
-        }
+                .compose(new AsyncTransformer<Task>(mUiThread, mIoThread));
     }
 }

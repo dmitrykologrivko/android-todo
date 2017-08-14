@@ -1,6 +1,7 @@
 package com.dmitrykologrivkogmail.todolist.ui.module.tasks;
 
 import com.dmitrykologrivkogmail.todolist.R;
+import com.dmitrykologrivkogmail.todolist.data.AuthorizationManager;
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
@@ -17,11 +18,17 @@ import rx.subscriptions.CompositeSubscription;
 @PerActivity
 public class TasksPresenter extends BasePresenter<TasksView> {
 
+    private final DataManager mDataManager;
+
+    private final AuthorizationManager mAuthorizationManager;
+
     private List<Task> mTasks;
 
     @Inject
-    public TasksPresenter(CompositeSubscription cs, DataManager dataManager) {
-        super(cs, dataManager);
+    public TasksPresenter(CompositeSubscription cs, DataManager dm, AuthorizationManager am) {
+        super(cs);
+        mDataManager = dm;
+        mAuthorizationManager = am;
     }
 
     public void getTasks() {
@@ -189,7 +196,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
     public void signOut() {
         checkViewAttached();
 
-        Subscription subscription = mDataManager.signOut()
+        Subscription subscription = mAuthorizationManager.signOut()
                 .subscribe(new Observer<Void>() {
                     @Override
                     public void onCompleted() {
