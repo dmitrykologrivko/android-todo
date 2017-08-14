@@ -2,7 +2,6 @@ package com.dmitrykologrivkogmail.todolist.data.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Comparator;
 import java.util.Date;
 
 public class TaskDTO {
@@ -73,52 +72,5 @@ public class TaskDTO {
 
     public void setUpdated(Date updated) {
         mUpdated = updated;
-    }
-
-    public static class CreatedComparator implements Comparator<TaskDTO> {
-
-        @Override
-        public int compare(TaskDTO a, TaskDTO b) {
-            return b.getCreated().compareTo(a.getCreated());
-        }
-    }
-
-    public static class IsDoneComparator implements Comparator<TaskDTO> {
-
-        @Override
-        public int compare(TaskDTO a, TaskDTO b) {
-            return Boolean.valueOf(a.isDone())
-                    .compareTo(b.isDone());
-        }
-    }
-
-    public static class Builder {
-
-        private long mId;
-        private String mDescription;
-        private boolean mIsDone;
-
-        public Builder id(long id) {
-            mId = id;
-            return this;
-        }
-
-        public Builder description(String description) {
-            mDescription = description;
-            return this;
-        }
-
-        public Builder done(boolean done) {
-            mIsDone = done;
-            return this;
-        }
-
-        public TaskDTO build() {
-            TaskDTO task = new TaskDTO();
-            task.setId(mId);
-            task.setDescription(mDescription);
-            task.setDone(mIsDone);
-            return task;
-        }
     }
 }
