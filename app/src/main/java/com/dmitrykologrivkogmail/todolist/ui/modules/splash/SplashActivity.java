@@ -8,7 +8,7 @@ import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.injection.component.SplashComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.modules.signin.SignInActivity;
-import com.dmitrykologrivkogmail.todolist.ui.tasks.TasksActivity;
+import com.dmitrykologrivkogmail.todolist.ui.modules.tasks.TasksActivity;
 
 public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> implements SplashView {
 

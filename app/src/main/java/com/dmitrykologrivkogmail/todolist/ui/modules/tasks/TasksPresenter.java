@@ -1,8 +1,7 @@
-package com.dmitrykologrivkogmail.todolist.ui.tasks;
+package com.dmitrykologrivkogmail.todolist.ui.modules.tasks;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
-import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;

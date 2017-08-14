@@ -31,7 +31,7 @@
             android:theme="@style/AppTheme.SignIn"/>
         <!--Tasks Activity-->
         <activity
-            android:name=".ui.tasks.TasksActivity"
+            android:name=".ui.modules.tasks.TasksActivity"
             android:screenOrientation="sensorPortrait"
             android:windowSoftInputMode="adjustNothing"/>
     </application>

@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.tasks;
+package com.dmitrykologrivkogmail.todolist.ui.modules.tasks;
 
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.hannesdorfmann.mosby.mvp.MvpView;
