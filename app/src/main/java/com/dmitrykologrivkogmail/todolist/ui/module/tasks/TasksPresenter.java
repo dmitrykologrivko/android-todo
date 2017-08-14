@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.modules.tasks;
+package com.dmitrykologrivkogmail.todolist.ui.module.tasks;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.DataManager;

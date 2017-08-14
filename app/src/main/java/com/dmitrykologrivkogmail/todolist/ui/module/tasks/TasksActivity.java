@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.modules.tasks;
+package com.dmitrykologrivkogmail.todolist.ui.module.tasks;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,7 +24,7 @@ import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.component.TasksComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
-import com.dmitrykologrivkogmail.todolist.ui.modules.signin.SignInActivity;
+import com.dmitrykologrivkogmail.todolist.ui.module.signin.SignInActivity;
 import com.dmitrykologrivkogmail.todolist.common.utils.DialogFactory;
 
 import java.util.List;

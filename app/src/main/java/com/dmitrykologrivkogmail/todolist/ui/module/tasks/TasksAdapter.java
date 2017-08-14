@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.modules.tasks;
+package com.dmitrykologrivkogmail.todolist.ui.module.tasks;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

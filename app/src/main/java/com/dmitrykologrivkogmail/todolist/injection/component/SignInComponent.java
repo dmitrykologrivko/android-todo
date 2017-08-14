@@ -2,8 +2,8 @@ package com.dmitrykologrivkogmail.todolist.injection.component;
 
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.injection.module.PresenterModule;
-import com.dmitrykologrivkogmail.todolist.ui.modules.signin.SignInPresenter;
-import com.dmitrykologrivkogmail.todolist.ui.modules.signin.SignInActivity;
+import com.dmitrykologrivkogmail.todolist.ui.module.signin.SignInPresenter;
+import com.dmitrykologrivkogmail.todolist.ui.module.signin.SignInActivity;
 
 import dagger.Subcomponent;
 

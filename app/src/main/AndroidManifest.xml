@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <!--Splash Activity-->
         <activity
-            android:name=".ui.modules.splash.SplashActivity"
+            android:name=".ui.module.splash.SplashActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
@@ -23,15 +23,15 @@
             </intent-filter>
         </activity>
         <!--Main Activity-->
-        <activity android:name=".ui.modules.main.MainActivity"/>
+        <activity android:name=".ui.module.main.MainActivity"/>
         <!--SignIn Activity-->
         <activity
-            android:name=".ui.modules.signin.SignInActivity"
+            android:name=".ui.module.signin.SignInActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.SignIn"/>
         <!--Tasks Activity-->
         <activity
-            android:name=".ui.modules.tasks.TasksActivity"
+            android:name=".ui.module.tasks.TasksActivity"
             android:screenOrientation="sensorPortrait"
             android:windowSoftInputMode="adjustNothing"/>
     </application>

@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.modules.signin;
+package com.dmitrykologrivkogmail.todolist.ui.module.signin;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
