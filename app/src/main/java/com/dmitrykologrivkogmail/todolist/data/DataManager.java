@@ -40,71 +40,65 @@ public class DataManager {
         mSchedulersTransformer = null;
         mTaskMapper = taskMapper;
         mTasksListMapper = tasksListMapper;
-//        mSchedulersTransformer = o -> ((Observable) o).subscribeOn(mIoThread)
-//                .observeOn(mUiThread)
-//                .unsubscribeOn(mIoThread);
     }
 
     public Observable<OAuthResponse> signIn(String username, String password) {
         return mOAuthManager.getAccessToken(username, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<OAuthResponse>());
     }
 
     public Observable<Void> signOut() {
         return mOAuthManager.clearTokens()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<Void>());
     }
 
     public Observable<Boolean> isAuthenticated() {
         return mOAuthManager.isAuthenticated()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<Boolean>());
     }
 
     public Observable<List<Task>> getTasks() {
         return mTasksService.getTasks(Task.Ordering.IS_DONE.toString())
                 .map(mTasksListMapper)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<List<Task>>());
     }
 
     public Observable<Task> createTask(Task task) {
         return mTasksService.createTask(task.getDescription())
                 .map(mTaskMapper)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<Task>());
     }
 
     public Observable<Task> editTask(Task task) {
         return mTasksService.editTask(task.getId(), task.getDescription())
                 .map(mTaskMapper)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<Task>());
     }
 
     public Observable<Task> markTask(Task task) {
         return mTasksService.markTask(task.getId(), task.isDone())
                 .map(mTaskMapper)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new AsyncTransformer<Task>());
     }
 
     public Observable<Task> deleteTask(final Task task) {
         return mTasksService.deleteTask(task.getId())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Func1<Void, Observable<Task>>() {
+                .concatMap(new Func1<Void, Observable<Task>>() {
                     @Override
                     public Observable<Task> call(Void aVoid) {
                         return Observable.just(task);
                     }
-                });
+                })
+                .compose(new AsyncTransformer<Task>());
     }
 
-    @SuppressWarnings("unchecked")
-    private <T> Observable.Transformer<T, T> applySchedulers() {
-        return (Observable.Transformer<T, T>) mSchedulersTransformer;
+    private class AsyncTransformer<T> implements Observable.Transformer<T, T> {
+
+        @Override
+        public Observable<T> call(Observable<T> observable) {
+            return observable
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+        }
     }
 }
