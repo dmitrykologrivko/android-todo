@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.signin;
+package com.dmitrykologrivkogmail.todolist.ui.modules.signin;
 
 import android.app.ProgressDialog;
 import android.content.Context;
