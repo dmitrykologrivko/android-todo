@@ -1,6 +1,6 @@
 package com.dmitrykologrivkogmail.todolist.ui.tasks;
 
-import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
+import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import java.util.List;
@@ -15,19 +15,19 @@ public interface TasksView extends MvpView {
 
     void dismissProgress();
 
-    void showTasks(List<TaskDTO> tasks);
+    void showTasks(List<Task> tasks);
 
     void sortTasks();
 
-    void addTask(TaskDTO task);
+    void addTask(Task task);
 
-    void updateTask(TaskDTO task);
+    void updateTask(Task task);
 
-    void removeTask(TaskDTO task);
+    void removeTask(Task task);
 
-    void showEditDialog(TaskDTO task);
+    void showEditDialog(Task task);
 
-    void showDeleteDialog(TaskDTO task);
+    void showDeleteDialog(Task task);
 
     void showError(String message);
 

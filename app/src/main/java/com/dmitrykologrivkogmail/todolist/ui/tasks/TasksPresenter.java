@@ -3,6 +3,7 @@ package com.dmitrykologrivkogmail.todolist.ui.tasks;
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
+import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
@@ -17,7 +18,7 @@ import rx.subscriptions.CompositeSubscription;
 @PerActivity
 public class TasksPresenter extends BasePresenter<TasksView> {
 
-    private List<TaskDTO> mTasks;
+    private List<Task> mTasks;
 
     @Inject
     public TasksPresenter(CompositeSubscription cs, DataManager dataManager) {
@@ -30,7 +31,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         getView().showProgress();
 
         Subscription subscription = mDataManager.getTasks()
-                .subscribe(new Observer<List<TaskDTO>>() {
+                .subscribe(new Observer<List<Task>>() {
                     @Override
                     public void onCompleted() {
                         getView().dismissProgress();
@@ -43,7 +44,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     }
 
                     @Override
-                    public void onNext(List<TaskDTO> tasks) {
+                    public void onNext(List<Task> tasks) {
                         mTasks = tasks;
 
                         if (isTasksEmpty()) {
@@ -67,7 +68,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
             return;
         }
 
-        TaskDTO task = new TaskDTO.Builder()
+        Task task = new Task.Builder()
                 .description(description)
                 .done(false)
                 .build();
@@ -75,7 +76,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         getView().showProgress();
 
         Subscription subscription = mDataManager.createTask(task)
-                .subscribe(new Observer<TaskDTO>() {
+                .subscribe(new Observer<Task>() {
                     @Override
                     public void onCompleted() {
                         getView().dismissProgress();
@@ -89,7 +90,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     }
 
                     @Override
-                    public void onNext(TaskDTO task) {
+                    public void onNext(Task task) {
                         getView().addTask(task);
                         getView().sortTasks();
                     }
@@ -98,7 +99,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         addSubscription(subscription);
     }
 
-    public void editTask(TaskDTO task, String description) {
+    public void editTask(Task task, String description) {
         checkViewAttached();
 
         if (description == null || description.isEmpty()) {
@@ -111,7 +112,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         getView().showProgress();
 
         Subscription subscription = mDataManager.editTask(task)
-                .subscribe(new Observer<TaskDTO>() {
+                .subscribe(new Observer<Task>() {
                     @Override
                     public void onCompleted() {
                         getView().dismissProgress();
@@ -124,7 +125,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     }
 
                     @Override
-                    public void onNext(TaskDTO task) {
+                    public void onNext(Task task) {
                         getView().updateTask(task);
                     }
                 });
@@ -132,13 +133,13 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         addSubscription(subscription);
     }
 
-    public void markTask(TaskDTO task) {
+    public void markTask(Task task) {
         checkViewAttached();
 
         task.setDone(!task.isDone());
 
         Subscription subscription = mDataManager.markTask(task)
-                .subscribe(new Observer<TaskDTO>() {
+                .subscribe(new Observer<Task>() {
                     @Override
                     public void onCompleted() {
 
@@ -150,7 +151,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     }
 
                     @Override
-                    public void onNext(TaskDTO task) {
+                    public void onNext(Task task) {
                         getView().updateTask(task);
                         getView().sortTasks();
                     }
@@ -159,13 +160,13 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         addSubscription(subscription);
     }
 
-    public void deleteTask(TaskDTO task) {
+    public void deleteTask(Task task) {
         checkViewAttached();
 
         getView().showProgress();
 
         Subscription subscription = mDataManager.deleteTask(task)
-                .subscribe(new Observer<TaskDTO>() {
+                .subscribe(new Observer<Task>() {
                     @Override
                     public void onCompleted() {
                         getView().dismissProgress();
@@ -178,7 +179,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     }
 
                     @Override
-                    public void onNext(TaskDTO task) {
+                    public void onNext(Task task) {
                         getView().removeTask(task);
                     }
                 });
@@ -211,11 +212,11 @@ public class TasksPresenter extends BasePresenter<TasksView> {
         addSubscription(subscription);
     }
 
-    public void onTaskClick(TaskDTO task) {
+    public void onTaskClick(Task task) {
         getView().showEditDialog(task);
     }
 
-    public void onDeleteButtonClick(TaskDTO task) {
+    public void onDeleteButtonClick(Task task) {
         getView().showDeleteDialog(task);
     }
 

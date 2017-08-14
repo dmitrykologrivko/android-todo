@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
-import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
+import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.component.TasksComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.signin.SignInActivity;
@@ -138,7 +138,7 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     }
 
     @Override
-    public void showTasks(List<TaskDTO> tasks) {
+    public void showTasks(List<Task> tasks) {
         mTasksAdapter.setModels(tasks);
     }
 
@@ -148,22 +148,22 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     }
 
     @Override
-    public void addTask(TaskDTO task) {
+    public void addTask(Task task) {
         mTasksAdapter.addItem(task);
     }
 
     @Override
-    public void updateTask(TaskDTO task) {
+    public void updateTask(Task task) {
         mTasksAdapter.updateItem(task);
     }
 
     @Override
-    public void removeTask(TaskDTO task) {
+    public void removeTask(Task task) {
         mTasksAdapter.removeItem(task);
     }
 
     @Override
-    public void showEditDialog(final TaskDTO task) {
+    public void showEditDialog(final Task task) {
         final LayoutInflater inflater = getLayoutInflater();
         final View editDialog = inflater.inflate(R.layout.dialog_edit, null);
 
@@ -198,7 +198,7 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
     }
 
     @Override
-    public void showDeleteDialog(final TaskDTO task) {
+    public void showDeleteDialog(final Task task) {
         final DialogInterface.OnClickListener positiveClick = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

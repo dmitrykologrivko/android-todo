@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.dmitrykologrivkogmail.todolist.R;
-import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
+import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseAdapter;
 import com.dmitrykologrivkogmail.todolist.util.MultiComparator;
@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @PerActivity
-public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHolder> {
+public class TasksAdapter extends BaseAdapter<Task, TasksAdapter.TasksViewHolder> {
 
     private TasksPresenter mPresenter;
 
@@ -46,14 +46,14 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
     }
 
     @Override
-    protected Object getModelId(TaskDTO item) {
+    protected Object getModelId(Task item) {
         return item.getId();
     }
 
     public void sortTasks() {
         MultiComparator.sort(mModels,
-                new TaskDTO.IsDoneComparator(),
-                new TaskDTO.CreatedComparator());
+                new Task.IsDoneComparator(),
+                new Task.CreatedComparator());
         notifyDataSetChanged();
     }
 
@@ -70,7 +70,7 @@ public class TasksAdapter extends BaseAdapter<TaskDTO, TasksAdapter.TasksViewHol
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(final TaskDTO task) {
+        void bind(final Task task) {
             checkIsDone.setChecked(task.isDone());
             textDescription.setText(task.getDescription());
 

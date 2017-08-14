@@ -1,9 +1,11 @@
 package com.dmitrykologrivkogmail.todolist.data;
 
-import com.dmitrykologrivkogmail.todolist.data.api.models.TaskDTO;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthManager;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthResponse;
 import com.dmitrykologrivkogmail.todolist.data.api.services.TasksService;
+import com.dmitrykologrivkogmail.todolist.data.mappers.TaskMapper;
+import com.dmitrykologrivkogmail.todolist.data.mappers.TasksListMapper;
+import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
 
 import java.util.List;
@@ -24,11 +26,20 @@ public class DataManager {
 
     private TasksService mTasksService;
 
+    private TaskMapper mTaskMapper;
+    private TasksListMapper mTasksListMapper;
+
     @Inject
-    public DataManager(OAuthManager manager, TasksService tasksService) {
+    public DataManager(OAuthManager manager,
+                       TasksService tasksService,
+                       TaskMapper taskMapper,
+                       TasksListMapper tasksListMapper) {
+
         mOAuthManager = manager;
         mTasksService = tasksService;
         mSchedulersTransformer = null;
+        mTaskMapper = taskMapper;
+        mTasksListMapper = tasksListMapper;
 //        mSchedulersTransformer = o -> ((Observable) o).subscribeOn(mIoThread)
 //                .observeOn(mUiThread)
 //                .unsubscribeOn(mIoThread);
@@ -52,37 +63,41 @@ public class DataManager {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<List<TaskDTO>> getTasks() {
-        return mTasksService.getTasks(TasksService.IS_DONE)
+    public Observable<List<Task>> getTasks() {
+        return mTasksService.getTasks(Task.Ordering.IS_DONE.toString())
+                .map(mTasksListMapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<TaskDTO> createTask(TaskDTO task) {
+    public Observable<Task> createTask(Task task) {
         return mTasksService.createTask(task.getDescription())
+                .map(mTaskMapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<TaskDTO> editTask(TaskDTO task) {
+    public Observable<Task> editTask(Task task) {
         return mTasksService.editTask(task.getId(), task.getDescription())
+                .map(mTaskMapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<TaskDTO> markTask(TaskDTO task) {
+    public Observable<Task> markTask(Task task) {
         return mTasksService.markTask(task.getId(), task.isDone())
+                .map(mTaskMapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<TaskDTO> deleteTask(final TaskDTO task) {
+    public Observable<Task> deleteTask(final Task task) {
         return mTasksService.deleteTask(task.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Func1<Void, Observable<TaskDTO>>() {
+                .flatMap(new Func1<Void, Observable<Task>>() {
                     @Override
-                    public Observable<TaskDTO> call(Void aVoid) {
+                    public Observable<Task> call(Void aVoid) {
                         return Observable.just(task);
                     }
                 });
