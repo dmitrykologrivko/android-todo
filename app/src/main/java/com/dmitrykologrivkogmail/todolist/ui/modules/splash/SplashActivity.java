@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.splash;
+package com.dmitrykologrivkogmail.todolist.ui.modules.splash;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.ui.splash;
+package com.dmitrykologrivkogmail.todolist.ui.modules.splash;
 
 import com.dmitrykologrivkogmail.todolist.data.DataManager;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
