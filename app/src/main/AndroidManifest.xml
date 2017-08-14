@@ -22,8 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!--Main Activity-->
-        <activity android:name=".ui.module.main.MainActivity"/>
         <!--SignIn Activity-->
         <activity
             android:name=".ui.module.signin.SignInActivity"
