@@ -29,6 +29,8 @@ public interface TasksView extends MvpView {
 
     void showDeleteDialog(Task task);
 
+    void showError(Throwable e);
+
     void showError(String message);
 
     void showError(int messageResource);

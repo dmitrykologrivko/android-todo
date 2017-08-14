@@ -21,11 +21,12 @@ import android.widget.Toast;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
+import com.dmitrykologrivkogmail.todolist.common.util.DialogFactory;
+import com.dmitrykologrivkogmail.todolist.common.util.ErrorUtil;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.di.component.TasksComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.module.signin.SignInActivity;
-import com.dmitrykologrivkogmail.todolist.common.util.DialogFactory;
 
 import java.util.List;
 
@@ -208,6 +209,16 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
                 .setMessage(R.string.tasks_dialog_delete_message)
                 .setNegativeButton(R.string.dialog_action_no, null)
                 .setPositiveButton(R.string.dialog_action_yes, positiveClick)
+                .show();
+    }
+
+    @Override
+    public void showError(Throwable e) {
+        String message = ErrorUtil.handleError(this, e);
+
+        DialogFactory.createSimpleOkErrorDialog(this,
+                getString(R.string.dialog_error_title),
+                message)
                 .show();
     }
 

@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.TodoApplication;
+import com.dmitrykologrivkogmail.todolist.common.util.ErrorUtil;
 import com.dmitrykologrivkogmail.todolist.di.component.SignInComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.module.tasks.TasksActivity;
@@ -79,6 +80,16 @@ public class SignInActivity extends BaseActivity<SignInView, SignInPresenter> im
     public void dismissProgress() {
         mProgressDialog.cancel();
         mProgressDialog = null;
+    }
+
+    @Override
+    public void showError(Throwable e) {
+        String message = ErrorUtil.handleError(this, e);
+
+        DialogFactory.createSimpleOkErrorDialog(this,
+                getString(R.string.dialog_error_title),
+                message)
+                .show();
     }
 
     @Override

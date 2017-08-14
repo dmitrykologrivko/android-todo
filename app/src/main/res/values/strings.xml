@@ -31,4 +31,20 @@
     <!--General actions-->
     <string name="action_sing_out">Sign out</string>
 
+    <!-- Errors -->
+    <string name="error_connection">Connection error. Please try again after some time</string>
+    <string name="error_offline">You are offline</string>
+    <string name="error_http_client_side">An error occurred on the client side. Please try again after some time</string>
+    <string name="error_http_server_side">An error occurred on the server side. Please try again after some time</string>
+    <string name="error_http_auth">Authorization error occurred, try to sign in again</string>
+    <string name="error_http_forbidden">You don’t have permission for this action</string>
+    <string name="error_http_internal_server">An internal server error occurred</string>
+    <string name="error_http_method_not_allowed">The method by which a request is made to a resource not available.</string>
+    <string name="error_http_resource_not_found">The requested resource is not found</string>
+    <string name="error_http_timeout">Timeout transmission server from the client has expired.</string>
+    <string name="error_http_syntax">The request can not be executed since a syntax error.</string>
+    <string name="error_http_unavailable">The server is temporarily unable to process requests for technical reasons</string>
+    <string name="error_http_unknown">Unknown HTTP connection error. Please try again after some time</string>
+    <string name="error_unknown">Unknown error. Please try again. If error shows again please contact to support team.</string>
+
 </resources>

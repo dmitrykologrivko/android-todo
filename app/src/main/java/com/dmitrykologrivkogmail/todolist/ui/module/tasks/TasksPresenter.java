@@ -46,7 +46,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onError(Throwable e) {
                         getView().dismissProgress();
-                        getView().showError(e.toString());
+                        getView().showError(e);
                     }
 
                     @Override
@@ -92,7 +92,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onError(Throwable e) {
                         getView().dismissProgress();
-                        getView().showError(e.toString());
+                        getView().showError(e);
                     }
 
                     @Override
@@ -127,7 +127,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onError(Throwable e) {
                         getView().dismissProgress();
-                        getView().showError(e.toString());
+                        getView().showError(e);
                     }
 
                     @Override
@@ -153,7 +153,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        getView().showError(e.toString());
+                        getView().showError(e);
                     }
 
                     @Override
@@ -181,7 +181,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     @Override
                     public void onError(Throwable e) {
                         getView().dismissProgress();
-                        getView().showError(e.toString());
+                        getView().showError(e);
                     }
 
                     @Override

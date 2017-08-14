@@ -50,7 +50,7 @@ public class SignInPresenter extends BasePresenter<SignInView> {
                     @Override
                     public void onError(Throwable e) {
                         getView().dismissProgress();
-                        getView().showError(e.toString());
+                        getView().showError(e);
                     }
 
                     @Override
