@@ -4,7 +4,7 @@ import com.dmitrykologrivkogmail.todolist.data.api.models.TokenDTO;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthClient;
 import com.dmitrykologrivkogmail.todolist.data.preferences.CredentialsHelper;
 import com.dmitrykologrivkogmail.todolist.injection.IoScheduler;
-import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
 import com.dmitrykologrivkogmail.todolist.injection.UiScheduler;
 
 import java.util.concurrent.Callable;

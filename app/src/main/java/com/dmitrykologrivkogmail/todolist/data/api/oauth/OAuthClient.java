@@ -2,7 +2,7 @@ package com.dmitrykologrivkogmail.todolist.data.api.oauth;
 
 import com.dmitrykologrivkogmail.todolist.common.constant.Injection;
 import com.dmitrykologrivkogmail.todolist.data.api.models.TokenDTO;
-import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
 import com.google.gson.Gson;
 
 import java.net.URL;

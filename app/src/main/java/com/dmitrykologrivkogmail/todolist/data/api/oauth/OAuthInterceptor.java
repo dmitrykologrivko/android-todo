@@ -3,7 +3,7 @@ package com.dmitrykologrivkogmail.todolist.data.api.oauth;
 import android.support.annotation.NonNull;
 
 import com.dmitrykologrivkogmail.todolist.data.preferences.CredentialsHelper;
-import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
 
 import java.io.IOException;
 

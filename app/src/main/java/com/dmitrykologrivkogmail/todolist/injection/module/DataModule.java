@@ -11,7 +11,7 @@ import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthInterceptor;
 import com.dmitrykologrivkogmail.todolist.data.api.services.TasksService;
 import com.dmitrykologrivkogmail.todolist.data.preferences.CredentialsHelper;
 import com.dmitrykologrivkogmail.todolist.injection.IoScheduler;
-import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
+import com.dmitrykologrivkogmail.todolist.injection.scope.PerApplication;
 import com.dmitrykologrivkogmail.todolist.injection.UiScheduler;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
