@@ -185,15 +185,12 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
             }
         };
 
-        DialogFactory.createViewDialog(this,
-                editDialog,
-                R.string.tasks_dialog_edit_title,
-                R.string.dialog_action_delete,
-                R.string.dialog_action_cancel,
-                R.string.dialog_action_edit,
-                neutralClick,
-                null,
-                positiveClick)
+        DialogFactory.createDialog(this)
+                .setView(editDialog)
+                .setTitle(R.string.tasks_dialog_edit_title)
+                .setNeutralButton(R.string.dialog_action_delete, neutralClick)
+                .setNegativeButton(R.string.dialog_action_cancel, null)
+                .setPositiveButton(R.string.dialog_action_edit, positiveClick)
                 .show();
     }
 
@@ -206,13 +203,11 @@ public class TasksActivity extends BaseActivity<TasksView, TasksPresenter> imple
             }
         };
 
-        DialogFactory.createDialog(this,
-                R.string.tasks_dialog_delete_title,
-                R.string.tasks_dialog_delete_message,
-                R.string.dialog_action_no,
-                R.string.dialog_action_yes,
-                null,
-                positiveClick)
+        DialogFactory.createDialog(this)
+                .setTitle(R.string.tasks_dialog_delete_title)
+                .setMessage(R.string.tasks_dialog_delete_message)
+                .setNegativeButton(R.string.dialog_action_no, null)
+                .setPositiveButton(R.string.dialog_action_yes, positiveClick)
                 .show();
     }
 
