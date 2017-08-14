@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
+
     defaultConfig {
         applicationId "com.dmitrykologrivkogmail.todolist"
         minSdkVersion 16
@@ -11,6 +12,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,15 +26,19 @@ dependencies {
     final DESIGN_VERSION = '25.3.1'
     final CONSTRAINT_LAYOUT_VERSION = '1.0.1'
     final SECURE_PREFERENCES_VERSION = '0.1.4'
-    final BUTTERKNIFE_VERSION = '8.5.1'
     final RETROFIT_VERSION = '2.1.0'
     final MOSBY_VERSION = '2.0.1'
     final RXJAVA_VERSION = '1.2.5'
     final RXANDROID_VERSION = '1.2.1'
     final DAGGER_VERSION = '2.9'
+    final BUTTERKNIFE_VERSION = '8.5.1'
     final STETHO_VERSION = '1.4.2'
-    final ESPRESSO_CORE_VERSION = '2.2.2'
+    final ESPRESSO_VERSION = '2.2.2'
     final JUNIT_VERSION = '4.12'
+    final MOCKITO_VERSION = '2.7.22'
+    final DEXMAKER_VERSION = '2.2.0'
+    final ROBOLECTRIC_VERSION = '3.3.2'
+    final MOCKWEBSERVER_VERSION = '20130706'
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -77,13 +83,25 @@ dependencies {
     //                            Instrumentation test dependencies                             //
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    androidTestCompile("com.android.support.test.espresso:espresso-core:$ESPRESSO_CORE_VERSION", {
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestCompile("com.android.support.test.espresso:espresso-intents:$ESPRESSO_VERSION") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
+    androidTestCompile "com.linkedin.dexmaker:dexmaker-mockito:$DEXMAKER_VERSION"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //                                  Unit tests dependencies                                 //
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     testCompile "junit:junit:$JUNIT_VERSION"
+    testCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
+    testCompile "org.robolectric:robolectric:$ROBOLECTRIC_VERSION"
+    testCompile "com.google.mockwebserver:mockwebserver:$MOCKWEBSERVER_VERSION"
+    testCompile ("com.google.dagger:dagger-compiler:$DAGGER_VERSION", {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    })
 }
