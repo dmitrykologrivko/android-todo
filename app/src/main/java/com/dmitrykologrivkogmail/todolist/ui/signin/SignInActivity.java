@@ -12,7 +12,7 @@ import com.dmitrykologrivkogmail.todolist.TodoApplication;
 import com.dmitrykologrivkogmail.todolist.injection.component.SignInComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.tasks.TasksActivity;
-import com.dmitrykologrivkogmail.todolist.common.util.DialogFactory;
+import com.dmitrykologrivkogmail.todolist.common.utils.DialogFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

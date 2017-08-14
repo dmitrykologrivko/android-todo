@@ -1,4 +1,4 @@
-package com.dmitrykologrivkogmail.todolist.common.util;
+package com.dmitrykologrivkogmail.todolist.common.utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
