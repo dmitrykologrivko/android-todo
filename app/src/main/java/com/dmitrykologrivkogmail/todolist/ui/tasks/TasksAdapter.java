@@ -11,7 +11,7 @@ import com.dmitrykologrivkogmail.todolist.R;
 import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseAdapter;
-import com.dmitrykologrivkogmail.todolist.util.MultiComparator;
+import com.dmitrykologrivkogmail.todolist.common.util.MultiComparator;
 
 import javax.inject.Inject;
 

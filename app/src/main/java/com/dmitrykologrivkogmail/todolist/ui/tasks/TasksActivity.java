@@ -25,7 +25,7 @@ import com.dmitrykologrivkogmail.todolist.data.models.Task;
 import com.dmitrykologrivkogmail.todolist.injection.component.TasksComponent;
 import com.dmitrykologrivkogmail.todolist.ui.base.BaseActivity;
 import com.dmitrykologrivkogmail.todolist.ui.signin.SignInActivity;
-import com.dmitrykologrivkogmail.todolist.util.DialogFactory;
+import com.dmitrykologrivkogmail.todolist.common.util.DialogFactory;
 
 import java.util.List;
 
