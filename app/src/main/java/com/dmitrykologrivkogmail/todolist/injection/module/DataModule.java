@@ -1,6 +1,6 @@
 package com.dmitrykologrivkogmail.todolist.injection.module;
 
-import com.dmitrykologrivkogmail.todolist.BuildConfig;
+import com.dmitrykologrivkogmail.todolist.common.constant.config.ApiConfig;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthAuthenticator;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthInterceptor;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthManager;
@@ -21,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class DataModule {
 
+    // OkHttp settings
     private static final int CONNECT_TIMEOUT = 10;
     private static final int READ_TIMEOUT = 60;
     private static final int WRITE_TIMEOUT = 120;
@@ -67,7 +68,7 @@ public class DataModule {
                              OAuthInterceptor interceptor,
                              OAuthAuthenticator authAuthenticator) {
         return new Retrofit.Builder()
-                .baseUrl(BuildConfig.BACKEND_URL)
+                .baseUrl(ApiConfig.BACKEND_URL)
                 .client(client.newBuilder()
                         .addInterceptor(interceptor)
                         .authenticator(authAuthenticator)

@@ -12,24 +12,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug {
-            // debug config
-            buildConfigField("String", "BACKEND_URL", "\"http://localhost:8000/api/\"")
-            buildConfigField("String", "OAUTH_URL", "\"http://localhost:8000/api/o/token/\"")
-            buildConfigField("String", "OAUTH_CLIENT_ID", "\"ex10IDblfgy4jNqqRpVBk1XtNpe1pmOCaPiW9T35\"")
-            buildConfigField("String", "OAUTH_CLIENT_SECRET", "\"5KOvpPjAs3BqxuzUfxqEqhpzX7YpqCGEyF6kubT4ZNgXyoakTAXmDqgna8j4MK5N18cm8KbJ47YHJ74rUloymMPdHOUY7gG5x2Xtv4zuNPtnf30qNDMTlxEz6yn2b5D2\"")
-        }
-
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-            // release config
-            buildConfigField("String", "BACKEND_URL", "\"http://localhost:8000/api/v1/\"")
-            buildConfigField("String", "OAUTH_URL", "\"http://localhost:8000/api/o/token/\"")
-            buildConfigField("String", "OAUTH_CLIENT_ID", "\"I5YRrL9Z33cMO2DMCtd1v5jD7YXdcMWYwbHkoUQ3\"")
-            buildConfigField("String", "OAUTH_CLIENT_SECRET", "\"dL2BRdqOT5kAivmoQBhjmKrLQoYIWYM6pL7UkfmjFz" +
-                    "Tsg3iCHa9R19jAprElVkz4Zdav2rpT3GGSNn2e0CL31MRLWw9OqAArhnVnon8QfWw03cRo0ei2UUhgPiL7aaf5\"")
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.dmitrykologrivkogmail.todolist.data.api.oauth;
 
-import com.dmitrykologrivkogmail.todolist.BuildConfig;
+import com.dmitrykologrivkogmail.todolist.common.constant.config.ApiConfig;
 import com.dmitrykologrivkogmail.todolist.injection.PerApplication;
 import com.google.gson.Gson;
 
@@ -48,11 +48,11 @@ public class OAuthManager {
     public OAuthResponse getAccessTokenSync(final String username,
                                             final String password) throws OAuthError {
         Request request = new Request.Builder()
-                .url(BuildConfig.OAUTH_URL)
+                .url(ApiConfig.OAUTH_URL)
                 .header(HEADER_ACCEPT, HEADER_APPLICATION_JSON)
                 .post(new FormBody.Builder()
-                        .add(FORM_FIELD_CLIENT_ID, BuildConfig.OAUTH_CLIENT_ID)
-                        .add(FORM_FIELD_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_SECRET)
+                        .add(FORM_FIELD_CLIENT_ID, ApiConfig.OAUTH_CLIENT_ID)
+                        .add(FORM_FIELD_CLIENT_SECRET, ApiConfig.OAUTH_CLIENT_SECRET)
                         .add(FORM_FIELD_GRANT_TYPE, GRANT_TYPE_PASSWORD)
                         .add(FORM_FIELD_USERNAME, username)
                         .add(FORM_FIELD_PASSWORD, password)
@@ -83,11 +83,11 @@ public class OAuthManager {
         String refreshToken = mStore.getRefreshToken();
 
         Request request = new Request.Builder()
-                .url(BuildConfig.OAUTH_URL)
+                .url(ApiConfig.OAUTH_URL)
                 .header(HEADER_ACCEPT, HEADER_APPLICATION_JSON)
                 .post(new FormBody.Builder()
-                        .add(FORM_FIELD_CLIENT_ID, BuildConfig.OAUTH_CLIENT_ID)
-                        .add(FORM_FIELD_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_SECRET)
+                        .add(FORM_FIELD_CLIENT_ID, ApiConfig.OAUTH_CLIENT_ID)
+                        .add(FORM_FIELD_CLIENT_SECRET, ApiConfig.OAUTH_CLIENT_SECRET)
                         .add(FORM_FIELD_GRANT_TYPE, GRANT_TYPE_REFRESH_TOKEN)
                         .add(FORM_FIELD_REFRESH_TOKEN, refreshToken)
                         .build())
