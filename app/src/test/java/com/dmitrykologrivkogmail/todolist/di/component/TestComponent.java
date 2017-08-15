@@ -1,6 +1,7 @@
 package com.dmitrykologrivkogmail.todolist.di.component;
 
 import com.dmitrykologrivkogmail.todolist.data.AuthorizationManagerTest;
+import com.dmitrykologrivkogmail.todolist.data.DataManagerTest;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthAuthenticatorTest;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthClientTest;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthInterceptorTest;
@@ -14,6 +15,8 @@ import dagger.Component;
 @PerApplication
 @Component(modules = {ApplicationTestModule.class, DataTestModule.class})
 public interface TestComponent extends ApplicationComponent {
+
+    void inject(DataManagerTest test);
 
     void inject(AuthorizationManagerTest test);
 
