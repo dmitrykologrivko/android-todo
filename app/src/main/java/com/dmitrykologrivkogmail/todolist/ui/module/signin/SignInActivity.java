@@ -47,7 +47,7 @@ public class SignInActivity extends BaseActivity<SignInView, SignInPresenter> im
 
     @OnClick(R.id.button_submit)
     void submit() {
-        getPresenter().onSubmitButtonClick();
+        getPresenter().signIn();
     }
 
     @NonNull

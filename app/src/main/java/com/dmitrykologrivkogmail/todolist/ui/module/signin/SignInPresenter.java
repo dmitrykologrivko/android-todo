@@ -63,8 +63,4 @@ public class SignInPresenter extends BasePresenter<SignInView> {
 
         addSubscription(subscription);
     }
-
-    public void onSubmitButtonClick() {
-        signIn();
-    }
 }
