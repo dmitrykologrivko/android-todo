@@ -1,6 +1,7 @@
 package com.dmitrykologrivkogmail.todolist.ui.module.splash;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import com.dmitrykologrivkogmail.todolist.R;
@@ -14,6 +15,8 @@ public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> im
 
     private static final int LAYOUT = R.layout.activity_splash;
 
+    private static final int DELAY = 1000;
+
     private final SplashComponent mSplashComponent =
             TodoApplication.getApplicationComponent().plusSplashComponent();
 
@@ -21,7 +24,14 @@ public class SplashActivity extends BaseActivity<SplashView, SplashPresenter> im
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(LAYOUT);
-        getPresenter().isAuthenticated();
+
+        // Make 1 second delay
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getPresenter().isAuthenticated();
+            }
+        }, DELAY);
     }
 
     @NonNull

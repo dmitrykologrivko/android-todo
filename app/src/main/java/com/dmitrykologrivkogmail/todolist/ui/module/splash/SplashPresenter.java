@@ -4,8 +4,6 @@ import com.dmitrykologrivkogmail.todolist.data.AuthorizationManager;
 import com.dmitrykologrivkogmail.todolist.di.scope.PerActivity;
 import com.dmitrykologrivkogmail.todolist.ui.base.BasePresenter;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 
 import rx.Observer;
@@ -27,7 +25,6 @@ public class SplashPresenter extends BasePresenter<SplashView> {
         checkViewAttached();
 
         Subscription subscription = mAuthorizationManager.isAuthenticated()
-                .delay(1, TimeUnit.SECONDS)
                 .subscribe(new Observer<Boolean>() {
                     @Override
                     public void onCompleted() {
