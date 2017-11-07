@@ -221,10 +221,12 @@ public class TasksPresenter extends BasePresenter<TasksView> {
     }
 
     public void onTaskClick(Task task) {
+        checkViewAttached();
         getView().showEditDialog(task);
     }
 
     public void onDeleteButtonClick(Task task) {
+        checkViewAttached();
         getView().showDeleteDialog(task);
     }
 }
