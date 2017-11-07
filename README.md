@@ -1,4 +1,4 @@
-# Android - To Do
+# Android - To Do - MVP
 
 Example of simple android todo application based on Model View Presenter (MVP) architecture.
 
