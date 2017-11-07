@@ -12,6 +12,8 @@ import rx.Observer;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
+import static com.dmitrykologrivkogmail.todolist.common.util.Preconditions.isNullOrEmpty;
+
 @PerActivity
 public class SignInPresenter extends BasePresenter<SignInView> {
 
@@ -29,11 +31,11 @@ public class SignInPresenter extends BasePresenter<SignInView> {
         String username = getView().getEditUsername();
         String password = getView().getEditPassword();
 
-        if (username == null || username.isEmpty()) {
+        if (isNullOrEmpty(username)) {
             getView().showError(R.string.sign_in_empty_email_error);
             return;
         }
-        if (password == null || password.isEmpty()) {
+        if (isNullOrEmpty(password)) {
             getView().showError(R.string.sign_in_empty_password_error);
             return;
         }

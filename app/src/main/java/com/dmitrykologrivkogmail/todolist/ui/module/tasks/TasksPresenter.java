@@ -15,6 +15,8 @@ import rx.Observer;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
+import static com.dmitrykologrivkogmail.todolist.common.util.Preconditions.isNullOrEmpty;
+
 @PerActivity
 public class TasksPresenter extends BasePresenter<TasksView> {
 
@@ -53,7 +55,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
                     public void onNext(List<Task> tasks) {
                         mTasks = tasks;
 
-                        if (isTasksEmpty()) {
+                        if (isNullOrEmpty(mTasks)) {
                             getView().showTasksEmpty();
                         } else {
                             getView().showTasks(mTasks);
@@ -69,7 +71,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
 
         String description = getView().getDescription();
 
-        if (description == null || description.isEmpty()) {
+        if (isNullOrEmpty(description)) {
             getView().showError(R.string.tasks_empty_description_error);
             return;
         }
@@ -108,7 +110,7 @@ public class TasksPresenter extends BasePresenter<TasksView> {
     public void editTask(Task task, String description) {
         checkViewAttached();
 
-        if (description == null || description.isEmpty()) {
+        if (isNullOrEmpty(description)) {
             getView().showError(R.string.tasks_empty_description_error);
             return;
         }
@@ -224,9 +226,5 @@ public class TasksPresenter extends BasePresenter<TasksView> {
 
     public void onDeleteButtonClick(Task task) {
         getView().showDeleteDialog(task);
-    }
-
-    private boolean isTasksEmpty() {
-        return mTasks == null || mTasks.isEmpty();
     }
 }

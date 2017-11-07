@@ -4,8 +4,8 @@ import com.dmitrykologrivkogmail.todolist.data.api.models.TokenDTO;
 import com.dmitrykologrivkogmail.todolist.data.api.oauth.OAuthClient;
 import com.dmitrykologrivkogmail.todolist.data.preferences.CredentialsHelper;
 import com.dmitrykologrivkogmail.todolist.di.IoScheduler;
-import com.dmitrykologrivkogmail.todolist.di.scope.PerApplication;
 import com.dmitrykologrivkogmail.todolist.di.UiScheduler;
+import com.dmitrykologrivkogmail.todolist.di.scope.PerApplication;
 
 import java.util.concurrent.Callable;
 
@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Scheduler;
 import rx.functions.Func1;
+
+import static com.dmitrykologrivkogmail.todolist.common.util.Preconditions.isNullOrEmpty;
 
 @PerApplication
 public class AuthorizationManager {
@@ -63,11 +65,11 @@ public class AuthorizationManager {
                         .toBlocking()
                         .first();
 
-                if (accessToken == null || accessToken.isEmpty()) {
+                if (isNullOrEmpty(accessToken)) {
                     return false;
                 }
 
-                if (refreshToken == null || refreshToken.isEmpty()) {
+                if (isNullOrEmpty(refreshToken)) {
                     return false;
                 }
 
