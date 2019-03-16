@@ -34,7 +34,7 @@ Libraries used on the sample project
 
 # Demo
 
-![](./art/app.png)
+![](./docs/arts/app.png)
 
 #### Build an application
 
@@ -56,6 +56,10 @@ Libraries used on the sample project
 'Flavor' is name of running product flavor. You can find generated report here: /app/build/reports/jacoco/testFlavorDebugUnitTestCoverage/html/intext.html
 
 `./gradlew test<Flavor>DebugUnitTestCoverage`
+
+## REST API Backend
+
+You can use [this project](https://github.com/dmitrykologrivko/django-todo) as a REST API Backend for the app.
 
 ## Developed By
 
