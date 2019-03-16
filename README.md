@@ -32,7 +32,7 @@ Libraries used on the sample project
 [12]: http://robolectric.org/
 [13]: https://code.google.com/archive/p/mockwebserver/
 
-# Demo
+## Demo
 
 ![](./docs/arts/app.png)
 
